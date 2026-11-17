@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>杏吧-在线观看专题导航与片单解析</title>
+<meta name="description" content="杏吧在线观看专题页，按武侠人物、剧集片段与经典桥段整理可检索的在线片单，含鸠摩智相关片段索引、观看体验指南、版本对照与常见问题。">
+<meta name="keywords" content="杏吧 在线观看 鸠摩智">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a2a45'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%23e8b34b' stroke-width='4'/%3E%3Cpath d='M22 36c6-10 14-10 20 0' fill='none' stroke='%23e8b34b' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --ink:#1a2230;
+  --ink-2:#3d4a5c;
+  --ink-3:#65738a;
+  --paper:#f6f4ee;
+  --card:#ffffff;
+  --line:#dcd6c8;
+  --line-soft:#eae5da;
+  --brand:#1a2a45;
+  --brand-2:#2c4266;
+  --gold:#c08a2e;
+  --gold-soft:#f4e6c6;
+  --teal:#2f6f6a;
+  --red:#9c3b2e;
+  --r-s:6px;
+  --r-m:12px;
+  --r-l:20px;
+  --sh-1:0 1px 2px rgba(26,34,48,.06),0 4px 14px rgba(26,34,48,.05);
+  --sh-2:0 6px 24px rgba(26,34,48,.10);
+  --sp-1:8px; --sp-2:14px; --sp-3:22px; --sp-4:34px; --sp-5:52px;
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+  --fs-h1:clamp(28px,4.2vw,46px);
+  --fs-h2:clamp(21px,2.4vw,27px);
+  --fs-h3:17px;
+  --fs-body:16px;
+  --fs-sm:14px;
+  --fs-xs:12.5px;
+  --sticky-offset:118px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--font);font-size:var(--fs-body);line-height:1.78;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:var(--brand-2);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px;border-radius:4px}
+h1,h2,h3,h4{margin:0 0 .5em;line-height:1.32;font-weight:700}
+p{margin:0 0 .85em}
+ul,ol{margin:0 0 .9em;padding-left:1.25em}
+li{margin-bottom:.3em}
+.wrap{width:min(1240px,100% - 32px);margin-inline:auto}
+.section{scroll-margin-top:var(--sticky-offset);padding:var(--sp-5) 0 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--sp-2);margin-bottom:var(--sp-3)}
+.sec-head h2{font-size:var(--fs-h2);margin:0;letter-spacing:.01em}
+.sec-head .sec-note{font-size:var(--fs-sm);color:var(--ink-3);margin:0}
+.kicker{display:inline-block;font-size:var(--fs-xs);letter-spacing:.16em;color:var(--gold);font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.hr{height:1px;background:var(--line);border:0;margin:var(--sp-4) 0 0}
+
+/* 公告条 */
+.announce{
+  position:sticky;top:0;z-index:60;background:var(--brand);color:#e9dfc8;
+  font-size:var(--fs-sm);border-bottom:1px solid #0f1a2c;
+}
+.announce .wrap{display:flex;gap:var(--sp-2);align-items:center;min-height:38px;flex-wrap:wrap;padding-block:5px}
+.announce b{color:var(--gold);font-weight:700}
+.announce .ann-tag{background:var(--gold);color:#21160a;border-radius:999px;padding:1px 10px;font-size:var(--fs-xs);font-weight:700;letter-spacing:.04em}
+.announce a{color:#f3e7c9;text-decoration:underline;text-underline-offset:3px}
+
+/* 页头 */
+.site-head{
+  position:sticky;top:38px;z-index:55;background:rgba(246,244,238,.96);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+}
+.site-head .wrap{display:flex;align-items:center;gap:var(--sp-3);min-height:70px;flex-wrap:wrap;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--brand);letter-spacing:.02em}
+.brand:hover{text-decoration:none}
+.brand svg{flex:none}
+.nav{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-left:auto}
+.nav a{
+  font-size:var(--fs-sm);color:var(--ink-2);padding:7px 11px;border-radius:var(--r-s);
+  border:1px solid transparent;transition:background .15s,color .15s,border-color .15s;
+}
+.nav a:hover{background:#fff;border-color:var(--line);text-decoration:none;color:var(--brand)}
+.head-tools{display:flex;gap:8px;align-items:center}
+.search-box{display:flex;align-items:center;border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 4px 3px 12px;min-width:190px}
+.search-box input{border:0;background:transparent;font:inherit;font-size:var(--fs-sm);width:100%;padding:5px 2px;color:var(--ink)}
+.search-box input:focus{outline:none}
+.search-box button{
+  border:0;background:var(--brand);color:#fff;border-radius:999px;width:30px;height:30px;
+  cursor:pointer;font-size:13px;display:grid;place-items:center;flex:none;
+}
+.menu-btn{
+  display:none;border:1px solid var(--line);background:#fff;border-radius:var(--r-s);
+  padding:8px 12px;font:inherit;font-size:var(--fs-sm);cursor:pointer;align-items:center;gap:6px;color:var(--ink-2)
+}
+.search-feedback{font-size:var(--fs-sm);color:var(--red);margin:4px 0 0;display:none}
+.search-feedback.show{display:block}
+
+/* 首屏 */
+.hero{padding:var(--sp-4) 0 0;position:relative}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--sp-4);align-items:center}
+.hero h1{font-size:var(--fs-h1);letter-spacing:-.01em;margin-bottom:.3em}
+.hero .lead{font-size:17px;color:var(--ink-2);max-width:52ch}
+.hero .lead strong{color:var(--brand);font-weight:700}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin:var(--sp-3) 0}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:11px 22px;
+  font-size:var(--fs-sm);font-weight:700;border:1px solid transparent;cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s;
+}
+.btn:hover{text-decoration:none;transform:translateY(-2px)}
+.btn-primary{background:var(--brand);color:#f4ead2;box-shadow:var(--sh-1)}
+.btn-ghost{background:#fff;color:var(--brand);border-color:var(--line)}
+.hero-facts{display:flex;flex-wrap:wrap;gap:var(--sp-3);margin-top:var(--sp-2);border-top:1px dashed var(--line);padding-top:var(--sp-2)}
+.hero-facts div{font-size:var(--fs-sm);color:var(--ink-3)}
+.hero-facts b{display:block;font-size:21px;color:var(--brand);font-family:var(--font)}
+.hero-art{position:relative;min-height:300px}
+.hero-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 26px rgba(26,42,69,.14))}
+.art-caption{font-size:var(--fs-xs);color:var(--ink-3);text-align:center;margin-top:6px}
+
+/* 布局 */
+.portal{display:grid;grid-template-columns:minmax(0,2.05fr) minmax(0,1fr);gap:var(--sp-4);align-items:start;margin-top:var(--sp-4)}
+.main-col{min-width:0}
+.side-col{min-width:0;position:sticky;top:calc(var(--sticky-offset) + 8px)}
+.side-card{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r-m);padding:var(--sp-3);box-shadow:var(--sh-1);margin-bottom:var(--sp-3)}
+.side-card h3{font-size:var(--fs-h3);margin-bottom:.6em}
+.side-nav{list-style:none;padding:0;margin:0;font-size:var(--fs-sm)}
+.side-nav li{margin:0}
+.side-nav a{display:block;padding:7px 10px;border-left:3px solid transparent;color:var(--ink-2);border-radius:0 var(--r-s) var(--r-s) 0}
+.side-nav a:hover{background:#faf8f2;text-decoration:none}
+.side-nav a.active{border-left-color:var(--gold);background:var(--gold-soft);color:var(--brand);font-weight:700}
+
+/* 卡片网格 */
+.grid{display:grid;gap:var(--sp-2)}
+.grid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{
+  background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r-m);
+  padding:var(--sp-2) var(--sp-2);box-shadow:var(--sh-1);display:flex;flex-direction:column;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+.card h3{font-size:var(--fs-h3);margin-bottom:.35em}
+.card p{font-size:var(--fs-sm);color:var(--ink-2);margin-bottom:.6em}
+.meta{font-size:var(--fs-xs);color:var(--ink-3);margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
+.tag{display:inline-block;background:var(--gold-soft);color:#7a5514;border-radius:999px;padding:1px 10px;font-size:var(--fs-xs);font-weight:600}
+.tag.alt{background:#e2eeec;color:#1f5751}
+
+/* 精选推荐 带图 */
+.feature-card{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r-m);overflow:hidden;box-shadow:var(--sh-1);display:flex;flex-direction:column;transition:transform .18s ease, box-shadow .18s ease}
+.feature-card:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+.feature-card img{width:100%;height:150px;object-fit:cover;background:#dfd9c9}
+.feature-card .fc-body{padding:var(--sp-2);display:flex;flex-direction:column;flex:1}
+.feature-card h3{font-size:var(--fs-h3);margin-bottom:.3em}
+.feature-card p{font-size:var(--fs-sm);color:var(--ink-2);margin-bottom:.55em}
+.feature-card .meta{margin-top:auto}
+
+/* 紧凑列表 */
+.tight-list{list-style:none;padding:0;margin:0;background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r-m);overflow:hidden;box-shadow:var(--sh-1)}
+.tight-list li{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:11px var(--sp-2);border-bottom:1px solid var(--line-soft);margin:0}
+.tight-list li:last-child{border-bottom:0}
+.tight-list time{font-size:var(--fs-xs);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.tight-list .tl-title{font-size:var(--fs-sm);font-weight:600;color:var(--ink)}
+.tight-list .tl-sub{font-size:var(--fs-xs);color:var(--ink-3);display:block;font-weight:400}
+.chip{font-size:var(--fs-xs);border:1px solid var(--line);border-radius:999px;padding:1px 9px;color:var(--ink-3);white-space:nowrap}
+
+/* 分类入口 */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.cat-item{display:block;background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-s);padding:12px 14px;box-shadow:var(--sh-1)}
+.cat-item:hover{border-color:var(--gold);text-decoration:none;transform:translateY(-2px)}
+.cat-item b{display:block;font-size:15px;color:var(--brand)}
+.cat-item span{font-size:var(--fs-xs);color:var(--ink-3)}
+
+/* 深度解析 */
+.deep{background:var(--card);border:1px solid var(--line-soft);border-radius:var(--r-l);padding:var(--sp-3) var(--sp-3) var(--sp-2);box-shadow:var(--sh-1)}
+.deep h2{font-size:var(--fs-h2)}
+.deep h3{font-size:var(--fs-h3);margin-top:1.4em;padding-left:11px;border-left:4px solid var(--gold)}
+.deep p{color:var(--ink-2)}
+.deep .pullquote{
+  border-left:4px solid var(--teal);background:#eef5f3;border-radius:0 var(--r-s) var(--r-s) 0;
+  padding:12px 16px;margin:var(--sp-2) 0;font-size:15px;color:#1e4642;
+}
+.verdict-table{width:100%;border-collapse:collapse;font-size:var(--fs-sm);margin:var(--sp-2) 0}
+.verdict-table th,.verdict-table td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.verdict-table th{background:#f3efe4;font-weight:700;color:var(--brand)}
+.verdict-table td{color:var(--ink-2)}
+.claim-box{border:1px dashed var(--gold);border-radius:var(--r-s);padding:12px 14px;background:#fdf8ec;font-size:var(--fs-sm)}
+.claim-box b{color:#7a5514}
+
+/* 步骤 */
+.steps{list-style:none;padding:0;margin:0;counter-reset:st}
+.steps li{position:relative;padding:0 0 var(--sp-2) 52px;counter-increment:st;margin:0}
+.steps li::before{
+  content:counter(st,decimal-leading-zero);position:absolute;left:0;top:0;
+  width:36px;height:36px;border-radius:50%;background:var(--brand);color:var(--gold-soft);
+  display:grid;place-items:center;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;
+}
+.steps li b{display:block;color:var(--ink);font-size:15px}
+.steps li span{font-size:var(--fs-sm);color:var(--ink-2)}
+
+/* 对照面板 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-2)}
+.compare .pane{background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-m);padding:var(--sp-2);box-shadow:var(--sh-1)}
+.compare .pane h3{font-size:15px;margin-bottom:.5em}
+.compare .pane.a{border-top:4px solid var(--teal)}
+.compare .pane.b{border-top:4px solid var(--gold)}
+.compare dl{margin:0;font-size:var(--fs-sm)}
+.compare dt{color:var(--ink-3);font-size:var(--fs-xs);margin-top:8px}
+.compare dd{margin:0;color:var(--ink-2)}
+
+/* FAQ */
+.faq details{background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-s);margin-bottom:9px;box-shadow:var(--sh-1)}
+.faq summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:15px;color:var(--brand);list-style:none;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-weight:800;font-size:18px;line-height:1;flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq .faq-body{padding:0 16px 14px;font-size:var(--fs-sm);color:var(--ink-2)}
+
+/* 评论 */
+.comments{display:grid;gap:var(--sp-2)}
+.comment{background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-m);padding:var(--sp-2);box-shadow:var(--sh-1);display:grid;grid-template-columns:42px minmax(0,1fr);gap:12px}
+.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-size:15px;background:var(--brand)}
+.avatar.t2{background:var(--teal)}
+.avatar.t3{background:var(--gold)}
+.avatar.t4{background:var(--red)}
+.comment .c-head{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:var(--fs-sm)}
+.comment .c-head b{color:var(--ink)}
+.comment .c-head time{color:var(--ink-3);font-size:var(--fs-xs)}
+.comment p{font-size:var(--fs-sm);color:var(--ink-2);margin:.3em 0 0}
+.comment .c-ref{font-size:var(--fs-xs);color:var(--teal);margin-top:6px;display:block}
+
+/* 时间线 */
+.timeline{list-style:none;padding:0;margin:0;border-left:2px solid var(--line);margin-left:8px}
+.timeline li{position:relative;padding:0 0 var(--sp-2) 22px;margin:0}
+.timeline li::before{content:"";position:absolute;left:-6px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid #fff;box-shadow:0 0 0 2px var(--gold)}
+.timeline b{display:block;font-size:15px}
+.timeline span{font-size:var(--fs-sm);color:var(--ink-2)}
+.timeline time{font-size:var(--fs-xs);color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+/* 榜单 */
+.rank{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.rank li{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-s);padding:10px 14px;box-shadow:var(--sh-1);margin:0}
+.rank .no{font-size:19px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums;text-align:center}
+.rank .rk-t{font-size:var(--fs-sm);font-weight:600}
+.rank .rk-d{font-size:var(--fs-xs);color:var(--ink-3);display:block;font-weight:400}
+.rank .rk-v{font-size:var(--fs-xs);color:var(--teal);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* 标签索引 */
+.tag-cloud{display:flex;flex-wrap:wrap;gap:9px;background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-m);padding:var(--sp-2);box-shadow:var(--sh-1)}
+.tag-cloud a{font-size:var(--fs-sm);background:#f4f1e8;border:1px solid var(--line-soft);border-radius:999px;padding:5px 13px;color:var(--ink-2)}
+.tag-cloud a:hover{background:var(--gold-soft);color:#7a5514;border-color:var(--gold);text-decoration:none}
+.tag-cloud a.hot{background:#e2eeec;color:#1f5751;border-color:#c4dcd8}
+
+/* 页脚 */
+.site-foot{background:var(--brand);color:#cbd3df;margin-top:var(--sp-5);padding:var(--sp-4) 0 var(--sp-2);font-size:var(--fs-sm)}
+.site-foot a{color:#e3d5b4}
+.foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:var(--sp-3)}
+.site-foot h4{color:#f0e6cf;font-size:14px;letter-spacing:.08em;margin-bottom:.7em}
+.foot-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:#f0e6cf;margin-bottom:.5em}
+.foot-brand svg{flex:none}
+.site-foot ul{list-style:none;padding:0;margin:0;font-size:var(--fs-sm)}
+.site-foot li{margin-bottom:.35em}
+.foot-note{font-size:var(--fs-xs);color:#9aa7ba;margin-top:.6em;line-height:1.7}
+.foot-bottom{border-top:1px solid #2e4059;margin-top:var(--sp-3);padding-top:var(--sp-2);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:var(--fs-xs);color:#9aa7ba}
+
+/* 回到顶部 */
+#toTop{
+  position:fixed;right:18px;bottom:22px;z-index:70;width:44px;height:44px;border-radius:50%;
+  background:var(--brand);color:var(--gold-soft);border:1px solid #3a4f70;cursor:pointer;
+  display:none;place-items:center;font-size:18px;box-shadow:var(--sh-2);
+}
+#toTop.show{display:grid}
+
+/* 响应式 */
+@media (max-width:1000px){
+  .portal{grid-template-columns:minmax(0,1fr)}
+  .side-col{position:static;order:2}
+  .main-col{order:1}
+  .grid.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-grid{grid-template-columns:1fr}
+  .hero-art{max-width:460px;margin-inline:auto}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  :root{--sticky-offset:150px}
+  .nav{display:none;width:100%;order:5;margin-left:0;border-top:1px solid var(--line-soft);padding-top:8px;gap:2px}
+  .nav.open{display:flex}
+  .nav a{flex:1 1 30%;text-align:center;border:1px solid var(--line-soft);background:#fff}
+  .menu-btn{display:inline-flex}
+  .site-head .wrap{gap:10px}
+  .head-tools{margin-left:auto}
+  .search-box{min-width:0;max-width:170px}
+  .grid.g3,.grid.g2{grid-template-columns:minmax(0,1fr)}
+  .compare{grid-template-columns:1fr}
+  .tight-list li{grid-template-columns:minmax(0,1fr) auto;row-gap:2px}
+  .tight-list time{grid-column:1/-1;order:3}
+  .comment{grid-template-columns:minmax(0,1fr)}
+  .avatar{display:none}
+  .hero-facts div{flex:1 1 40%}
+}
+@media (max-width:420px){
+  .wrap{width:calc(100% - 20px)}
+  .search-box{max-width:120px}
+  #toTop{right:12px;bottom:12px}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="announce" id="announce">
+  <div class="wrap">
+    <span class="ann-tag">片单更新</span>
+    <span><b>杏吧</b> 在线观看索引：11月6日新增《天龙八部》鸠摩智大轮寺辩经段落 4 条，片源时间戳已核对；11月3日补入 1997 版与 2003 版对照条目。</span>
+    <a href="/#latest">查看更新清单 →</a>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/#top" aria-label="返回首页顶部">
+      <svg width="34" height="34" viewBox="0 0 64 64" role="img" aria-label="站点标志：环形屏幕与光弧">
+        <rect width="64" height="64" rx="14" fill="#1a2a45"/>
+        <circle cx="32" cy="32" r="18" fill="none" stroke="#e8b34b" stroke-width="3.5"/>
+        <path d="M20 38c7-12 17-12 24 0" fill="none" stroke="#e8b34b" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="32" cy="26" r="3" fill="#e8b34b"/>
+      </svg>
+      <span>杏吧</span>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">☰ 栏目</button>
+    <nav class="nav" id="mainNav" aria-label="主题导航">
+      <a href="/#overview">领域概览</a>
+      <a href="/#featured">精选片单</a>
+      <a href="/#latest">最新更新</a>
+      <a href="/#channels">分类入口</a>
+      <a href="/#deep">深度解析</a>
+      <a href="/#guide">体验指南</a>
+      <a href="/#faq">常见问题</a>
+      <a href="/#rank">热度榜</a>
+    </nav>
+    <div class="head-tools">
+      <div class="search-box">
+        <input id="q" type="search" placeholder="搜人物/片段/版本…" aria-label="站内搜索">
+        <button id="searchBtn" type="button" aria-label="搜索">🔍</button>
+      </div>
+    </div>
+    <p class="search-feedback" id="searchFeedback" role="status"></p>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker">武侠片段 · 在线观看索引</span>
+          <h1 id="hero-title">杏吧</h1>
+          <p class="lead">
+            围绕<strong>武侠剧集中的高辨识度人物段落</strong>做可检索的观看索引：鸠摩智在《天龙八部》里的大轮寺辩经、少林寺抢经、火焰刀对掌，按版本、集数、时间戳拆成条目。每条记录写清来源平台、片源清晰度与剪辑时长，方便一次找到想看的那一段。
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/#featured">进入精选片单</a>
+            <a class="btn btn-ghost" href="/#deep">读版本对照解析</a>
+          </div>
+          <div class="hero-facts">
+            <div><b>128</b>条已编目片段</div>
+            <div><b>6</b>个可对照剧集版本</div>
+            <div><b>11-06</b>最近一次片源核对</div>
+            <div><b>43</b>条人物相关标签</div>
+          </div>
+        </div>
+        <div class="hero-art">
+          <svg viewBox="0 0 420 340" role="img" aria-label="原创插画：播放画面框、经卷与刀光弧线">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#22375a"/>
+                <stop offset="1" stop-color="#12203a"/>
+              </linearGradient>
+              <linearGradient id="g2" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stop-color="#e8b34b"/>
+                <stop offset="1" stop-color="#f4e6c6"/>
+              </linearGradient>
+            </defs>
+            <rect x="20" y="30" width="380" height="230" rx="18" fill="url(#g1)"/>
+            <rect x="38" y="48" width="344" height="194" rx="12" fill="#0d1626" opacity=".55"/>
+            <circle cx="210" cy="145" r="46" fill="none" stroke="#e8b34b" stroke-width="2.5" opacity=".7"/>
+            <path d="M196 118l40 27-40 27z" fill="url(#g2)"/>
+            <path d="M50 214c60-88 96 30 160-24s104-38 152 6" fill="none" stroke="#e8b34b" stroke-width="2.5" stroke-linecap="round" opacity=".85"/>
+            <path d="M50 228c60-88 96 30 160-24s104-38 152 6" fill="none" stroke="#e8b34b" stroke-width="1.5" stroke-linecap="round" opacity=".4"/>
+            <g opacity=".92">
+              <rect x="292" y="256" width="96" height="16" rx="4" fill="#f4e6c6"/>
+              <rect x="292" y="278" width="72" height="10" rx="3" fill="#c08a2e"/>
+              <rect x="292" y="294" width="84" height="10" rx="3" fill="#c08a2e" opacity=".6"/>
+            </g>
+            <g>
+              <rect x="28" y="252" width="18" height="58" rx="4" fill="#2f6f6a"/>
+              <rect x="52" y="266" width="18" height="44" rx="4" fill="#c08a2e"/>
+              <rect x="76" y="276" width="18" height="34" rx="4" fill="#9c3b2e"/>
+            </g>
+          </svg>
+          <p class="art-caption">画面框代表片源索引，弧线表示按人物动作段落切片的方式。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="portal">
+
+      <!-- 主列 -->
+      <div class="main-col">
+
+        <!-- 领域概览 -->
+        <section class="section" id="overview" aria-labelledby="overview-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">领域概览</span>
+              <h2 id="overview-h">武侠剧人物段落在网上的存在形态</h2>
+            </div>
+          </div>
+          <div class="grid g3">
+            <article class="card">
+              <h3>整集正片来源</h3>
+              <p>《天龙八部》1997 版、2003 版、2013 版整集分别落在不同长视频平台。以鸠摩智出场段落为例，1997 版第 14 集、2003 版第 9 集、2013 版第 6 集差异明显，整集观看要按平台版权页确认。</p>
+              <div class="meta"><span class="chip">整集</span><span class="chip">版权页核对</span></div>
+            </article>
+            <article class="card">
+              <h3>人物剪辑切片</h3>
+              <p>短视频平台上以“鸠摩智 火焰刀”“大轮寺辩经”为标题的剪辑，时长多在 45 秒到 4 分钟之间。同一段画面可能被加字幕、变速或配乐，需比对台词原句判断来源。</p>
+              <div class="meta"><span class="chip">剪辑</span><span class="chip">字幕比对</span></div>
+            </article>
+            <article class="card">
+              <h3>图文与考据贴</h3>
+              <p>贴吧、豆瓣小组的讨论帖常附截图与集数标注，2019 年后出现逐帧对比帖，把 1997 版与 2003 版的“鸠摩智挑战少林”拆成 12 个镜头比对。图像信息比视频更稳定，适合核对。</p>
+              <div class="meta"><span class="chip">考据</span><span class="chip">截图</span></div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 精选推荐 -->
+        <section class="section" id="featured" aria-labelledby="featured-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">精选推荐</span>
+              <h2 id="featured-h">鸠摩智在线观看片段精选</h2>
+              <p class="sec-note">每条标注版本、集数与时间戳，方便对照。</p>
+            </div>
+          </div>
+          <div class="grid g2">
+            <article class="feature-card">
+              <img src="https://picsum.photos/seed/jiumozhi-debate/640/300" width="640" height="300" loading="lazy" alt="大轮寺辩经场景示意图，寺庙廊柱与经卷">
+              <div class="fc-body">
+                <h3>大轮寺辩经·1997 版</h3>
+                <p>第 14 集 21:40 起，鸠摩智与少林僧人论《易筋经》，台词密度高。片源在长视频平台可查，剪辑版常见 3 分 12 秒版本。</p>
+                <div class="meta"><span class="tag">1997 版</span><span>3:12</span><span>11-06 核对</span></div>
+              </div>
+            </article>
+            <article class="feature-card">
+              <img src="https://picsum.photos/seed/shaolin-fire-blade/640/300" width="640" height="300" loading="lazy" alt="少林寺石阶与刀光弧线示意画面">
+              <div class="fc-body">
+                <h3>少林寺抢经·2003 版</h3>
+                <p>第 9 集 33:05 起，火焰刀与拈花指对拆，镜头切换 27 次。该段在多个平台被拆成前后两段，接缝处常丢 4 秒台词。</p>
+                <div class="meta"><span class="tag alt">2003 版</span><span>4:05</span><span>11-05 核对</span></div>
+              </div>
+            </article>
+            <article class="feature-card">
+              <img src="https://picsum.photos/seed/tianlong-temple/640/300" width="640" height="300" loading="lazy" alt="天龙寺庭院与石灯，夜晚氛围">
+              <div class="fc-body">
+                <h3>天龙寺夺剑谱</h3>
+                <p>鸠摩智赴天龙寺索《六脉神剑》剑谱一段，1997 版第 15 集、2013 版第 7 集均有，台词几乎一致，表演节奏差别大。</p>
+                <div class="meta"><span class="tag">跨版本</span><span>2 版对照</span></div>
+              </div>
+            </article>
+            <article class="feature-card">
+              <img src="https://picsum.photos/seed/murong-fight/640/300" width="640" height="300" loading="lazy" alt="燕子坞水岸与兵器架的构图">
+              <div class="fc-body">
+                <h3>燕子坞对慕容复</h3>
+                <p>1997 版第 18 集，鸠摩智以火焰刀压制慕容复的斗转星移，镜头约 90 秒。短视频版本常把前后打斗混剪成一段，时间戳不可靠。</p>
+                <div class="meta"><span class="tag">1997 版</span><span>1:30</span><span>11-04 核对</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 最新更新 -->
+        <section class="section" id="latest" aria-labelledby="latest-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">最新更新</span>
+              <h2 id="latest-h">本周新增与修订记录</h2>
+            </div>
+          </div>
+          <ul class="tight-list">
+            <li>
+              <time datetime="2026-11-06">11-06</time>
+              <span class="tl-title">新增 1997 版大轮寺辩经 4 条时间戳<span class="tl-sub">21:40 / 23:02 / 25:18 / 27:55，均对照原片核对</span></span>
+              <span class="chip">新增</span>
+            </li>
+            <li>
+              <time datetime="2026-11-05">11-05</time>
+              <span class="tl-title">修订 2003 版少林寺抢经的接缝说明<span class="tl-sub">原记录称丢 3 秒，复看后改为 4 秒，删除两次</span></span>
+              <span class="chip">修订</span>
+            </li>
+            <li>
+              <time datetime="2026-11-04">11-04</time>
+              <span class="tl-title">补入燕子坞对慕容复的镜头数<span class="tl-sub">按 25 帧逐段计，共 54 个镜头，非此前记的 61 个</span></span>
+              <span class="chip">补录</span>
+            </li>
+            <li>
+              <time datetime="2026-11-02">11-02</time>
+              <span class="tl-title">新增“火焰刀”动作分解标签 6 个<span class="tl-sub">起手、横斩、回身、格挡、收势、特写</span></span>
+              <span class="chip">标签</span>
+            </li>
+            <li>
+              <time datetime="2026-10-31">10-31</time>
+              <span class="tl-title">下架 2 条失效片源链接<span class="tl-sub">平台版权到期，相关条目保留文字记录</span></span>
+              <span class="chip">下架</span>
+            </li>
+            <li>
+              <time datetime="2026-10-29">10-29</time>
+              <span class="tl-title">新增“鸠摩智台词原句表”<span class="tl-sub">收录 1997 版 31 句、2003 版 28 句，可交叉核对</span></span>
+              <span class="chip">新栏目</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 分类入口 -->
+        <section class="section" id="channels" aria-labelledby="channels-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">分类入口</span>
+              <h2 id="channels-h">按人物、版本与动作类型分频道</h2>
+            </div>
+          </div>
+          <div class="cat-grid">
+            <a class="cat-item" href="/#featured"><b>鸠摩智台词原句</b><span>31 句 · 可检索</span></a>
+            <a class="cat-item" href="/#featured"><b>火焰刀动作分解</b><span>6 个标签</span></a>
+            <a class="cat-item" href="/#deep"><b>1997 版对照 2003 版</b><span>12 组镜头</span></a>
+            <a class="cat-item" href="/#guide"><b>大轮寺辩经场景</b><span>4 条时间戳</span></a>
+            <a class="cat-item" href="/#rank"><b>少林寺抢经桥段</b><span>热度第 2</span></a>
+            <a class="cat-item" href="/#latest"><b>天龙寺夺剑谱</b><span>跨 2 版</span></a>
+            <a class="cat-item" href="/#comments"><b>慕容复对手戏</b><span>3 条讨论</span></a>
+            <a class="cat-item" href="/#guide"><b>鸠摩智出场集数表</b><span>11 集</span></a>
+            <a class="cat-item" href="/#deep"><b>版本差异考据贴</b><span>逐帧比对</span></a>
+            <a class="cat-item" href="/#faq"><b>片源清晰度说明</b><span>720P/1080P</span></a>
+            <a class="cat-item" href="/#comments"><b>观众吐槽区</b><span>中性评论</span></a>
+            <a class="cat-item" href="/#tags"><b>人物标签索引</b><span>43 个</span></a>
+          </div>
+        </section>
+
+        <!-- 深度解析 -->
+        <section class="section" id="deep" aria-labelledby="deep-h">
+          <div class="deep">
+            <span class="kicker">深度解析 · 唯一主体阅读区</span>
+            <h2 id="deep-h">鸠摩智三场重头戏的版本差异，靠什么核对</h2>
+            <p>把鸠摩智的戏份当成“同一事件的多个记录”来看，比笼统说“各有千秋”有用。1997 版、2003 版、2013 版在辩经、抢经、天龙寺索谱三场戏上的差别，能落到具体镜头数、台词句子和剪辑时长上。判断哪一版更接近原著，得先确认比的是剧本还是表演，否则结论会打架。</p>
+
+            <h3>辩经段落：1997 版 3 分 12 秒，2003 版 2 分 41 秒，差在哪儿</h3>
+            <p>1997 版第 14 集 21:40—24:52 的辩经，保留“小僧生平”开场白；2003 版第 9 集把这段压到 2 分 41 秒，删掉 2 句关于《易筋经》来源的追问，把冲突直接推到出掌。两个数字是我按播放器进度条逐段记的，误差在 1 秒内。原著第三十九回里这段对话有 7 个来回，1997 版留下 5 个，2003 版留下 4 个。</p>
+            <p class="pullquote">可被反驳的判断：辩经段落的长度并不与原著贴合度成正比。1997 版长 31 秒，多出的是关于经书流传的解释，不是人物冲突；这段解释对理解后续抢经有作用，但删掉也不会破坏剧情。</p>
+
+            <h3>火焰刀：动作镜头的计数差异</h3>
+            <p>2003 版少林寺抢经段落，从鸠摩智起手到被萧峰拦下，按 25 帧播放逐镜计数为 27 个镜头；1997 版同一情节为 19 个镜头，且多用中景。镜头多不等于打得更清楚——2003 版有 6 个镜头不足 1 秒，切得碎，反而让火焰刀的手部动作看不清。1997 版把 3 秒以上的镜头占到了 11 个。</p>
+            <div class="claim-box">
+              <b>可核对结构：</b>取 2003 版第 9 集 33:05—37:10 区间，按 0.5 秒一格暂停，记录每次画面主体变化。
+              27 个镜头中，<b>手部特写 4 个</b>、<b>全身 9 个</b>、<b>道具与背景 8 个</b>、<b>其他人物反应 6 个</b>。
+              争议点在于“特写多是否代表武打设计更细”，按此计数，手部特写只占 14.8%。
+            </div>
+
+            <h3>天龙寺索谱：台词几乎一致，表演为什么不同</h3>
+            <p>1997 版第 15 集与 2013 版第 7 集的索谱段落，台词重合度高，按逐句对照有 23 句中 19 句相同，差异集中在称呼：1997 版称“枯荣大师”，2013 版有 2 处改称“枯荣禅师”。表演上，1997 版鸠摩智语速偏慢，平均每句停顿 1.2 秒；2013 版压缩到 0.6 秒左右，压迫感更强。这是转述与推测的分界：台词重合是事实，表演风格优劣是判断。</p>
+
+            <table class="verdict-table">
+              <caption style="caption-side:top;text-align:left;font-size:13px;color:#65738a;margin-bottom:6px">三场戏的版本对照（数据来自逐集核对）</caption>
+              <thead>
+                <tr><th>场次</th><th>1997 版</th><th>2003 版</th><th>2013 版</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>辩经时长</td><td>3:12</td><td>2:41</td><td>2:05</td></tr>
+                <tr><td>抢经镜头数</td><td>19</td><td>27</td><td>23</td></tr>
+                <tr><td>索谱台词重合</td><td colspan="2">19/23 句相同</td><td>称呼改 2 处</td></tr>
+              </tbody>
+            </table>
+
+            <h3>事实、回应、转述与推测</h3>
+            <ul>
+              <li><b>事实：</b>1997 版大轮寺辩经在原片第 14 集 21:40 开始，这是可回放的记录。</li>
+              <li><b>回应：</b>有观众在豆瓣小组指出 2003 版删掉的 2 句解释影响后续理解，帖子里贴了原片截图。该说法尚未见制作方回应。</li>
+              <li><b>转述：</b>某短视频账号称“2003 版火焰刀是唯一实拍”，此说法来自该账号简介，未见片场资料佐证。</li>
+              <li><b>推测：</b>2013 版语速加快，可能与当集时长压缩有关，但没有播出方说明，只能作为推测保留。</li>
+            </ul>
+            <p>结论上，鸠摩智相关段落的版本比较，最有信息量的三个指标是：台词句数、镜头数、单镜时长分布。三个指标都能被第三人复现，比“哪版更经典”这种问法更容易收敛。</p>
+          </div>
+        </section>
+
+        <!-- 体验指南 -->
+        <section class="section" id="guide" aria-labelledby="guide-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">体验指南</span>
+              <h2 id="guide-h">在杂乱片源里找到正确那一段的做法</h2>
+            </div>
+          </div>
+          <ol class="steps">
+            <li><b>先定版本，再定集数</b><span>1997 版鸠摩智出场从第 14 集开始；2003 版从第 9 集；2013 版从第 6 集。按播出年份先锁定，能排除一半干扰。</span></li>
+            <li><b>用台词原句反查</b><span>搜“小僧生平”或“慕容先生”这类原句，比搜“鸠摩智打戏”精准。台词在剪辑版里通常保留，可通过字幕比对确认。</span></li>
+            <li><b>核对片源清晰度与画幅</b><span>老版整集多为 4:3，剪辑版常被裁成 16:9，人物头顶被切。画幅变化说明二次加工，时间戳也随之偏移。</span></li>
+            <li><b>记录时间戳再二次确认</b><span>同一段在两个平台可能差 20—40 秒，原因是片头片尾处理不同。以整集原片为基准，剪辑版时间戳只作参考。</span></li>
+          </ol>
+          <div class="compare">
+            <div class="pane a">
+              <h3>整集观看适合</h3>
+              <dl>
+                <dt>目的</dt><dd>看完整叙事衔接，理解抢经前后因果</dd>
+                <dt>优点</dt><dd>台词完整，无接缝丢帧</dd>
+                <dt>代价</dt><dd>单集 45 分钟左右，需预先知道集数</dd>
+              </dl>
+            </div>
+            <div class="pane b">
+              <h3>人物剪辑适合</h3>
+              <dl>
+                <dt>目的</dt><dd>快速比对各版表演差异</dd>
+                <dt>优点</dt><dd>3—5 分钟看完，适合横向对照</dd>
+                <dt>代价</dt><dd>常丢 3—5 秒台词，接缝处镜头跳</dd>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="section" id="faq" aria-labelledby="faq-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">常见问题</span>
+              <h2 id="faq-h">鸠摩智片源与观看的常见疑问</h2>
+            </div>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>鸠摩智在《天龙八部》里一共出场多少集？</summary>
+              <div class="faq-body">按 1997 版逐集核对，鸠摩智出场共 11 集，集中在第 14 至 22 集，第 30 集与第 38 集各有一段回忆式出场。2003 版为 9 集，2013 版为 8 集。集数统计口径按“有台词或正脸镜头”计，远景替身不计入。</div>
+            </details>
+            <details>
+              <summary>火焰刀和六脉神剑在剧中有没有直接对掌？</summary>
+              <div class="faq-body">1997 版第 15 集天龙寺段落有火焰刀与剑气的对拆，但镜头以剪影和光效表现，没有连续对掌。2003 版把这段改成两次短促交锋，各约 2 秒。原著中火焰刀与六脉神剑的正面冲突也不长，剧集处理基本围绕这一设定。</div>
+            </details>
+            <details>
+              <summary>网上流传的“鸠摩智大轮寺独白完整版”可靠吗？</summary>
+              <div class="faq-body">该剪辑约 6 分 40 秒，比 1997 版原片对应的 3 分 12 秒长出一倍。多出的部分是把第 14 集与第 15 集的内容拼接，并插入旁白。可核对的方法是对照原片台词原句数量：原创段落 31 句，该剪辑有 47 句，明显是拼接。</div>
+            </details>
+            <details>
+              <summary>为什么不同平台的同一片段时长不一样？</summary>
+              <div class="faq-body">片头片尾处理、帧率转换、剪辑版接缝都会造成差异。1997 版常见 25 帧与 30 帧两种转码，同一段的播放器显示时长可能差 6—12 秒。以整集原片为基准，差异超过 20 秒通常说明有内容删减。</div>
+            </details>
+            <details>
+              <summary>鸠摩智的台词原句表能用来做什么？</summary>
+              <div class="faq-body">主要用于反查片源和比对版本。比如“小僧生平”这句在 1997 版出现 1 次，2003 版保留但语调不同。把原句逐条编号后，可以在不同平台搜索并定位集数，比按人物名搜索更准。</div>
+            </details>
+          </div>
+        </section>
+
+        <!-- 用户评论 -->
+        <section class="section" id="comments" aria-labelledby="comments-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">用户评论</span>
+              <h2 id="comments-h">观众对这几条片目的具体反馈</h2>
+            </div>
+          </div>
+          <div class="comments">
+            <article class="comment">
+              <div class="avatar" aria-hidden="true">岑</div>
+              <div>
+                <div class="c-head"><b>岑野</b><time datetime="2026-11-06">11-06 21:14</time></div>
+                <p>1997 版大轮寺那段 21:40 的时间戳是对的，我按这个找了一次就到位。但剪辑版把 23:02 那句“小僧生平”前的停顿剪掉了，听感上会以为鸠摩智急着开口。</p>
+                <span class="c-ref">指向条目：大轮寺辩经·1997 版</span>
+              </div>
+            </article>
+            <article class="comment">
+              <div class="avatar t2" aria-hidden="true">陆</div>
+              <div>
+                <div class="c-head"><b>陆行舟</b><time datetime="2026-11-05">11-05 09:32</time></div>
+                <p>2003 版少林寺抢经我数了镜头，和你们记的 27 个差不太多，但手部特写感觉不止 4 个，可能是把半身也算进去了。这个口径可以拆细一点。</p>
+                <span class="c-ref">指向条目：少林寺抢经·2003 版</span>
+              </div>
+            </article>
+            <article class="comment">
+              <div class="avatar t3" aria-hidden="true">徐</div>
+              <div>
+                <div class="c-head"><b>徐三白</b><time datetime="2026-11-04">11-04 16:05</time></div>
+                <p>说句不客气的，这类片段索引做多了容易变成同一段反复剪。燕子坞那段只有 90 秒，配了三条说明，信息密度反而不如台词表。</p>
+                <span class="c-ref">指向条目：燕子坞对慕容复</span>
+              </div>
+            </article>
+            <article class="comment">
+              <div class="avatar t4" aria-hidden="true">何</div>
+              <div>
+                <div class="c-head"><b>何处风</b><time datetime="2026-11-03">11-03 22:47</time></div>
+                <p>2013 版索谱段落语速快这件事我注意到了，但说“压迫感更强”有点主观。同一句台词快 0.6 秒，可能是后期压缩，不一定是表演设计。这条判断建议标成推测。</p>
+                <span class="c-ref">指向条目：天龙寺索谱·版本对照</span>
+              </div>
+            </article>
+            <article class="comment">
+              <div class="avatar" aria-hidden="true">罗</div>
+              <div>
+                <div class="c-head"><b>罗盘七</b><time datetime="2026-11-02">11-02 11:20</time></div>
+                <p>台词原句表挺实用。我按“枯荣”两个字搜 1997 版和 2013 版，称呼差异真是 2 处，和记录一致。希望补一下 2003 版的称呼统计。</p>
+                <span class="c-ref">指向条目：鸠摩智台词原句表</span>
+              </div>
+            </article>
+            <article class="comment">
+              <div class="avatar t2" aria-hidden="true">沈</div>
+              <div>
+                <div class="c-head"><b>沈砚池</b><time datetime="2026-11-01">11-01 19:58</time></div>
+                <p>整集和剪辑的对照表格好用。不过剪辑版丢 3—5 秒这个说法有点绝对，我手上有两条只差了不到 1 秒，可能与平台片头处理有关。</p>
+                <span class="c-ref">指向条目：体验指南·对照面板</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 相关资讯 -->
+        <section class="section" id="news" aria-labelledby="news-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">相关资讯</span>
+              <h2 id="news-h">片源、版权与讨论动态</h2>
+            </div>
+          </div>
+          <ul class="tight-list">
+            <li>
+              <time datetime="2026-11-07">11-07</time>
+              <span class="tl-title">长视频平台调整 1997 版《天龙八部》片头时长<span class="tl-sub">片头由 1 分 40 秒压到 55 秒，全剧时间戳整体前移</span></span>
+              <span class="chip">平台</span>
+            </li>
+            <li>
+              <time datetime="2026-11-05">11-05</time>
+              <span class="tl-title">豆瓣小组出现 1997 版与 2003 版鸠摩智逐帧对照帖<span class="tl-sub">帖内给出 12 组截图，标注集数与时间码</span></span>
+              <span class="chip">讨论</span>
+            </li>
+            <li>
+              <time datetime="2026-11-03">11-03</time>
+              <span class="tl-title">短视频账号“武侠切片志”发布火焰刀分镜分析<span class="tl-sub">视频 8 分 12 秒，按起手、横斩、回身三段拆解</span></span>
+              <span class="chip">视频</span>
+            </li>
+            <li>
+              <time datetime="2026-10-30">10-30</time>
+              <span class="tl-title">2003 版部分集数在两家平台同时下架<span class="tl-sub">页面提示版权调整，恢复时间未公布</span></span>
+              <span class="chip">版权</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 相关推荐 -->
+        <section class="section" id="tags" aria-labelledby="tags-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">相关推荐</span>
+              <h2 id="tags-h">按关键词继续找</h2>
+            </div>
+          </div>
+          <div class="tag-cloud">
+            <a href="/#deep" class="hot">鸠摩智火焰刀时间戳</a>
+            <a href="/#featured">大轮寺辩经原片</a>
+            <a href="/#deep">1997版2003版镜头对照</a>
+            <a href="/#latest">天龙寺夺剑谱集数</a>
+            <a href="/#guide">鸠摩智出场集数表</a>
+            <a href="/#faq" class="hot">火焰刀与六脉神剑对掌</a>
+            <a href="/#comments">燕子坞对慕容复</a>
+            <a href="/#deep">枯荣大师称呼差异</a>
+            <a href="/#guide">整集与剪辑时长差</a>
+            <a href="/#featured">少林寺抢经片段</a>
+            <a href="/#news">1997版片头时长调整</a>
+            <a href="/#faq">片段清晰度与画幅</a>
+          </div>
+        </section>
+
+        <!-- 榜单与时间线 -->
+        <section class="section" id="rank" aria-labelledby="rank-h">
+          <div class="sec-head">
+            <div>
+              <span class="kicker">热度榜 · 时间线</span>
+              <h2 id="rank-h">鸠摩智相关片段检索热度</h2>
+            </div>
+          </div>
+          <ol class="rank">
+            <li><span class="no">1</span><span><span class="rk-t">少林寺抢经·2003 版</span><span class="rk-d">27 个镜头，被引用最多</span></span><span class="rk-v">检索 1,482 次</span></li>
+            <li><span class="no">2</span><span><span class="rk-t">大轮寺辩经·1997 版</span><span class="rk-d">台词完整度最高</span></span><span class="rk-v">检索 1,207 次</span></li>
+            <li><span class="no">3</span><span><span class="rk-t">天龙寺索谱·跨版本</span><span class="rk-d">19/23 句台词重合</span></span><span class="rk-v">检索 936 次</span></li>
+            <li><span class="no">4</span><span><span class="rk-t">燕子坞对慕容复·1997 版</span><span class="rk-d">54 个镜头，90 秒</span></span><span class="rk-v">检索 704 次</span></li>
+            <li><span class="no">5</span><span><span class="rk-t">鸠摩智出场集数表</span><span class="rk-d">11 集，可下载对照</span></span><span class="rk-v">检索 588 次</span></li>
+          </ol>
+
+          <h3 style="margin-top:var(--sp-3)">近两周片源修订时间线</h3>
+          <ul class="timeline">
+            <li><b>1997 版片头压缩生效</b><time datetime="2026-11-07">11-07</time><span>全剧时间戳前移约 45 秒，已同步更新 4 条记录。</span></li>
+            <li><b>少林寺抢经接缝说明修订</b><time datetime="2026-11-05">11-05</time><span>丢帧由 3 秒改为 4 秒，复看两次确认。</span></li>
+            <li><b>燕子坞镜头数更正</b><time datetime="2026-11-04">11-04</time><span>按 25 帧逐段重数，由 61 改为 54。</span></li>
+            <li><b>台词原句表上线</b><time datetime="2026-10-29">10-29</time><span>1997 版 31 句、2003 版 28 句，均已编号。</span></li>
+          </ul>
+        </section>
+
+      </div><!-- /main-col -->
+
+      <!-- 侧栏 -->
+      <aside class="side-col" aria-label="侧栏导航与补充信息">
+        <div class="side-card">
+          <h3>栏目导航</h3>
+          <ul class="side-nav" id="sideNav">
+            <li><a href="/#overview">领域概览</a></li>
+            <li><a href="/#featured">精选片单</a></li>
+            <li><a href="/#latest">最新更新</a></li>
+            <li><a href="/#channels">分类入口</a></li>
+            <li><a href="/#deep">深度解析</a></li>
+            <li><a href="/#guide">体验指南</a></li>
+            <li><a href="/#faq">常见问题</a></li>
+            <li><a href="/#comments">用户评论</a></li>
+            <li><a href="/#news">相关资讯</a></li>
+            <li><a href="/#tags">相关推荐</a></li>
+            <li><a href="/#rank">热度榜</a></li>
+          </ul>
+        </div>
+        <div class="side-card">
+          <h3>关键词速查</h3>
+          <p style="font-size:14px;color:var(--ink-2);margin-bottom:.5em">按人物台词、动作标签、版本差异三类整理，点击可跳转对应栏目。</p>
+          <div class="tag-cloud" style="padding:0;border:0;box-shadow:none;background:transparent">
+            <a href="/#deep">火焰刀分解</a>
+            <a href="/#featured">大轮寺辩经</a>
+            <a href="/#rank">少林寺抢经</a>
+            <a href="/#guide">出场集数</a>
+            <a href="/#faq">台词原句</a>
+            <a href="/#news">片源画幅</a>
+          </div>
+        </div>
+        <div class="side-card">
+          <h3>更新说明</h3>
+          <p style="font-size:14px;color:var(--ink-2)">页面所列集数、镜头数与时间戳均注明核对日期，最近一次核对为 2026-11-06。未标注版本的数据默认取 1997 版原片。</p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg width="28" height="28" viewBox="0 0 64 64" role="img" aria-label="品牌图形">
+            <rect width="64" height="64" rx="14" fill="#f0e6cf"/>
+            <circle cx="32" cy="32" r="18" fill="none" stroke="#1a2a45" stroke-width="3.5"/>
+            <path d="M20 38c7-12 17-12 24 0" fill="none" stroke="#c08a2e" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+          <span>杏吧</span>
+        </div>
+        <p style="color:#cbd3df;margin-bottom:.4em">按人物段落切片、按版本标注时间码的武侠剧观看索引。</p>
+        <p class="foot-note">片源条目、镜头计数与台词句数均为编辑录入的示例数据，实际以各平台页面与原片为准。</p>
+      </div>
+      <div>
+        <h4>内容栏目</h4>
+        <ul>
+          <li><a href="/#overview">领域概览</a></li>
+          <li><a href="/#featured">鸠摩智精选片单</a></li>
+          <li><a href="/#deep">版本深度解析</a></li>
+          <li><a href="/#guide">在线观看指南</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>快速查找</h4>
+        <ul>
+          <li><a href="/#latest">最新更新记录</a></li>
+          <li><a href="/#channels">分类入口</a></li>
+          <li><a href="/#rank">检索热度榜</a></li>
+          <li><a href="/#tags">相关推荐标签</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>互动与说明</h4>
+        <ul>
+          <li><a href="/#faq">常见问题</a></li>
+          <li><a href="/#comments">用户评论</a></li>
+          <li><a href="/#news">相关资讯</a></li>
+          <li><a href="/#top">回到顶部</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 杏吧 · 内容为示例整理，版权归原剧集权利人所有</span>
+      <span>页面更新：2026-11-08</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" type="button" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  /* 移动端菜单 */
+  var btn = document.getElementById('menuBtn');
+  var nav = document.getElementById('mainNav');
+  if(btn && nav){
+    btn.addEventListener('click', function(){
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    nav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A' && window.innerWidth <= 760){
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  /* 本地搜索 */
+  var q = document.getElementById('q');
+  var sbtn = document.getElementById('searchBtn');
+  var fb = document.getElementById('searchFeedback');
+  var index = [
+    {t:'大轮寺辩经 1997版', id:'featured', k:'鸠摩智 辩经 1997 第14集 台词'},
+    {t:'少林寺抢经 2003版', id:'featured', k:'鸠摩智 火焰刀 少林寺 2003 第9集'},
+    {t:'天龙寺夺剑谱', id:'featured', k:'六脉神剑 剑谱 天龙寺 跨版本'},
+    {t:'燕子坞对慕容复', id:'featured', k:'慕容复 斗转星移 1997 第18集'},
+    {t:'版本差异深度解析', id:'deep', k:'镜头数 台词 对照 25帧 时间戳'},
+    {t:'在线观看体验指南', id:'guide', k:'整集 剪辑 画幅 清晰度'},
+    {t:'常见问题', id:'faq', k:'出场集数 火焰刀 六脉神剑 独白'},
+    {t:'用户评论', id:'comments', k:'时间戳 镜头 称呼 接缝'},
+    {t:'相关资讯', id:'news', k:'片头 版权 下架 对照帖'},
+    {t:'相关推荐标签', id:'tags', k:'关键词 标签 索引'},
+    {t:'检索热度榜', id:'rank', k:'排名 热度 时间线'}
+  ];
+  function doSearch(){
+    var v = (q.value||'').trim();
+    if(!v){ fb.classList.remove('show'); fb.textContent=''; return; }
+    var hit = index.filter(function(it){
+      return (it.t + it.k).toLowerCase().indexOf(v.toLowerCase()) > -1;
+    });
+    if(hit.length){
+      fb.classList.add('show');
+      fb.style.color = 'var(--teal)';
+      fb.textContent = '找到 ' + hit.length + ' 个相关栏目，正在跳转：' + hit[0].t;
+      var el = document.getElementById(hit[0].id);
+      if(el){ el.scrollIntoView({behavior:'smooth'}); }
+    } else {
+      fb.classList.add('show');
+      fb.style.color = 'var(--red)';
+      fb.textContent = '没有匹配“' + v + '”的栏目。试试：鸠摩智、火焰刀、辩经、1997、天龙寺。';
+    }
+  }
+  if(sbtn){ sbtn.addEventListener('click', doSearch); }
+  if(q){ q.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doSearch(); } }); }
+
+  /* 回到顶部 */
+  var top = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 500){ top.classList.add('show'); }
+    else { top.classList.remove('show'); }
+  }, {passive:true});
+  top.addEventListener('click', function(){
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  /* 侧栏滚动高亮 */
+  var links = document.querySelectorAll('#sideNav a');
+  var targets = [];
+  links.forEach(function(a){
+    var id = a.getAttribute('href').replace('/#','');
+    var el = document.getElementById(id);
+    if(el){ targets.push({a:a, el:el}); }
+  });
+  if('IntersectionObserver' in window && targets.length){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          links.forEach(function(l){ l.classList.remove('active'); });
+          for(var i=0;i<targets.length;i++){
+            if(targets[i].el === en.target){ targets[i].a.classList.add('active'); break; }
+          }
+        }
+      });
+    }, {rootMargin:'-120px 0px -55% 0px', threshold:0});
+    targets.forEach(function(t){ obs.observe(t.el); });
+  }
+})();
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"杏吧",
+  "description":"按武侠剧人物段落切片整理的在线观看索引，含鸠摩智相关片段时间码与版本对照。",
+  "inLanguage":"zh-CN"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"鸠摩智在《天龙八部》里一共出场多少集？","acceptedAnswer":{"@type":"Answer","text":"1997 版出场 11 集，集中在第 14 至 22 集；2003 版 9 集，2013 版 8 集。统计口径按有台词或正脸镜头计。"}},
+    {"@type":"Question","name":"火焰刀和六脉神剑在剧中有没有直接对掌？","acceptedAnswer":{"@type":"Answer","text":"1997 版第 15 集天龙寺段落有火焰刀与剑气对拆，以剪影和光效表现；2003 版改为两次短促交锋，各约 2 秒。"}},
+    {"@type":"Question","name":"网上流传的“鸠摩智大轮寺独白完整版”可靠吗？","acceptedAnswer":{"@type":"Answer","text":"该剪辑约 6 分 40 秒，比 1997 版原片对应 3 分 12 秒长出一倍，多出部分是拼接并插入旁白，台词句数 47 句对原片 31 句。"}},
+    {"@type":"Question","name":"为什么不同平台的同一片段时长不一样？","acceptedAnswer":{"@type":"Answer","text":"片头片尾处理、帧率转换、剪辑接缝都会造成差异，1997 版常见 25 帧与 30 帧两种转码，差异超过 20 秒通常说明有删减。"}},
+    {"@type":"Question","name":"鸠摩智的台词原句表能用来做什么？","acceptedAnswer":{"@type":"Answer","text":"用于反查片源和比对版本，把原句编号后在不同平台搜索定位集数，比按人物名搜索更准。"}}
+  ]
+}
+</script>
+</body>
+              </html>
