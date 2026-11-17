@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>黄仓库官网-仓储托管与分拣配送</title>
+<meta name="description" content="黄仓库官网，面向电商与批发商的仓储托管、分拣打包、同城配送与库存管理服务。整理入库上架、库位规则、旺季扩容、费用构成与验收流程，附真实作业时间与批次记录，供选仓前核对。">
+<meta name="keywords" content="黄仓库官网">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23b8862b'/%3E%3Cpath d='M14 40V26l18-10 18 10v14H14z' fill='%23f4e4bd'/%3E%3Crect x='26' y='32' width='12' height='14' fill='%23b8862b'/%3E%3C/svg%3E">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"黄仓库官网","alternateName":"黄仓库","inLanguage":"zh-CN"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"黄仓库入库上架一般要多久？","acceptedAnswer":{"@type":"Answer","text":"整柜到仓后按预约批次排，卸货加清点通常 0.5 个工作日，质检抽检加系统上架 1 个工作日。2026-11-03 入库的两板家纺，卸货 46 分钟，上架完成时间为次日上午 10:20。"}},
+{"@type":"Question","name":"库位是怎么分配的？","acceptedAnswer":{"@type":"Answer","text":"按 SKU 周转速度分 A/B/C 三档。A 档走靠近打包台的拣货通道，B 档走中区，C 档上高位货架。新接入的前两周为观察期，按实际出库频次调整一次。"}},
+{"@type":"Question","name":"旺季爆单能不能临时扩容？","acceptedAnswer":{"@type":"Answer","text":"可以按周租扩容存储面积和打包工位。2026-10-27 给出的双十一预案为：10 月 28 日至 11 月 15 日增加 6 个打包工位，夜班从 22:00 延到 00:30，需提前 7 天确认。"}},
+{"@type":"Question","name":"仓储费和操作费怎么算？","acceptedAnswer":{"@type":"Answer","text":"存储按占用库位面积和天计，操作费按入库件数、出库单量分别计。小件单件出库操作费 0.6 元起，大件按体积档位加价。报价单里会单列耗材与退件处理。"}},
+{"@type":"Question","name":"退件怎么处理？","acceptedAnswer":{"@type":"Answer","text":"退件到仓先登记外观，再按可二次销售、需翻新、报废三类分流。可二次销售的当天回架，翻新件集中在每周二、周四处理，结果录入退件台账。"}},
+{"@type":"Question","name":"能对接哪些电商平台？","acceptedAnswer":{"@type":"Answer","text":"系统支持淘宝、京东、拼多多、抖音小店与自有小程序订单导入，也可以走 ERP 接口做批量同步。库存按物理仓扣减，多平台共用同一份可用库存。"}}
+]}
+</script>
+<style>
+:root{
+  --brand:#b8862b;
+  --brand-dark:#8a6318;
+  --brand-soft:#f5ead2;
+  --ink:#1e1a14;
+  --ink-2:#4a4237;
+  --ink-3:#7a6f60;
+  --line:#e2d8c6;
+  --bg:#fbf8f1;
+  --card:#ffffff;
+  --accent:#2f6d5c;
+  --accent-soft:#e4efe9;
+  --warn:#a3482c;
+  --radius:10px;
+  --radius-sm:6px;
+  --shadow:0 1px 2px rgba(60,45,20,.06),0 6px 18px rgba(60,45,20,.06);
+  --space:clamp(14px,2.2vw,22px);
+  --wrap:1180px;
+  --sticky:104px;
+  --font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
+}
+body{
+  margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);
+  line-height:1.75;font-size:16px;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{line-height:1.35;margin:0}
+p{margin:0 0 .85em}
+a{color:var(--brand-dark);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;border-radius:4px;
+}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--space)}
+section[id]{scroll-margin-top:var(--sticky)}
+
+/* 吸顶公告条 */
+.announce{
+  position:sticky;top:0;z-index:60;background:var(--brand-dark);color:#fdf6e4;
+  font-size:13.5px;padding:7px 0;
+}
+.announce .wrap{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.announce b{color:#ffe9b0;font-weight:600}
+.announce .dot{width:6px;height:6px;border-radius:50%;background:#ffd97a;flex:none}
+
+/* 页头 */
+header.site{
+  position:sticky;top:31px;z-index:55;background:rgba(251,248,241,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);
+}
+.head-in{display:flex;align-items:center;gap:18px;padding:10px 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:19px;color:var(--ink)}
+.brand:hover{text-decoration:none}
+.brand-mark{width:38px;height:38px;flex:none}
+nav.main ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav.main a{
+  display:block;padding:6px 10px;font-size:14.5px;color:var(--ink-2);
+  border-radius:var(--radius-sm);
+}
+nav.main a:hover{background:var(--brand-soft);color:var(--brand-dark);text-decoration:none}
+.head-tools{display:flex;gap:8px;align-items:center;margin-left:auto}
+.search{display:flex;align-items:center;background:#fff;border:1px solid var(--line);border-radius:999px;padding:2px 4px 2px 12px}
+.search input{border:0;outline:0;font:inherit;font-size:14px;width:150px;background:transparent;color:var(--ink)}
+.search button{
+  border:0;background:var(--brand);color:#fff;border-radius:999px;
+  padding:5px 13px;font:inherit;font-size:13.5px;cursor:pointer;
+}
+.search button:hover{background:var(--brand-dark)}
+.btn{
+  display:inline-block;padding:8px 16px;border-radius:999px;font-size:14px;
+  background:var(--accent);color:#fff;border:1px solid var(--accent);cursor:pointer;font-family:inherit;
+}
+.btn:hover{background:#255a4b;text-decoration:none;color:#fff}
+.btn.ghost{background:transparent;color:var(--brand-dark);border-color:var(--brand)}
+.btn.ghost:hover{background:var(--brand-soft);color:var(--brand-dark)}
+.menu-btn{display:none;background:transparent;border:1px solid var(--line);border-radius:var(--radius-sm);padding:7px 12px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink-2)}
+.search-note{font-size:13px;color:var(--warn);padding:2px 4px 8px}
+
+/* 首屏 */
+.hero{padding:clamp(26px,4vw,46px) 0 clamp(20px,3vw,34px);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,3.5vw,44px);align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.06em;color:var(--brand-dark);background:var(--brand-soft);padding:4px 12px;border-radius:999px}
+.hero h1{font-size:clamp(30px,4.6vw,46px);letter-spacing:.01em;margin:14px 0 10px}
+.hero .lede{font-size:16.5px;color:var(--ink-2);max-width:34em}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.hero-stats{display:flex;gap:clamp(14px,3vw,34px);margin-top:26px;flex-wrap:wrap}
+.hero-stats div{min-width:96px}
+.hero-stats b{display:block;font-size:24px;color:var(--brand-dark);line-height:1.2}
+.hero-stats span{font-size:13px;color:var(--ink-3)}
+.hero-visual{
+  position:relative;background:linear-gradient(160deg,#fdf5e2,#f0e3c4);
+  border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);
+}
+.hero-visual svg{display:block;width:100%;height:auto}
+.hero-visual .tag{
+  position:absolute;right:14px;bottom:12px;font-size:12.5px;color:var(--ink-3);
+  background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 10px;
+}
+
+/* 通用版块 */
+.sec{padding:clamp(26px,3.6vw,42px) 0;border-top:1px solid var(--line)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(21px,2.6vw,26px)}
+.sec-head p{color:var(--ink-3);font-size:14px;margin:4px 0 0}
+.kicker{font-size:12.5px;letter-spacing:.09em;color:var(--brand);font-weight:600;margin-bottom:4px}
+
+/* 布局：双栏 + 侧栏 */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:clamp(20px,3vw,38px);align-items:start}
+aside.rail{position:sticky;top:calc(var(--sticky) + 12px)}
+.rail-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:16px}
+.rail-card h3{font-size:15px;margin-bottom:10px}
+.rail-nav ul{list-style:none;margin:0;padding:0;font-size:14px}
+.rail-nav a{display:block;padding:5px 8px;border-left:2px solid transparent;color:var(--ink-2);border-radius:0 4px 4px 0}
+.rail-nav a:hover{background:var(--brand-soft);text-decoration:none}
+.rail-nav a.active{border-left-color:var(--brand);background:var(--brand-soft);color:var(--brand-dark);font-weight:600}
+.rail-meta{font-size:13px;color:var(--ink-3)}
+.rail-meta b{color:var(--ink);font-weight:600}
+
+/* 卡片网格 */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease}
+.card:hover{transform:translateY(-3px)}
+.card img{width:100%;height:150px;object-fit:cover;display:block;background:#eee}
+.card-body{padding:14px 16px 16px}
+.card h3{font-size:16px;margin-bottom:6px}
+.card p{font-size:14px;color:var(--ink-2);margin:0 0 8px}
+.meta{font-size:12.5px;color:var(--ink-3);display:flex;gap:10px;flex-wrap:wrap}
+
+/* 紧凑列表 */
+.list{list-style:none;margin:0;padding:0}
+.list li{border-bottom:1px dashed var(--line);padding:11px 0}
+.list li:last-child{border-bottom:0}
+.list .t{font-size:15px;font-weight:600;color:var(--ink)}
+.list .d{font-size:14px;color:var(--ink-2);margin-top:2px}
+.list .m{font-size:12.5px;color:var(--ink-3);margin-top:3px}
+.tag{display:inline-block;font-size:12px;background:var(--brand-soft);color:var(--brand-dark);border-radius:999px;padding:1px 9px;margin-right:6px}
+.tag.green{background:var(--accent-soft);color:#255a4b}
+
+/* 频道索引 */
+.channels{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.channels a{
+  display:block;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);
+  padding:12px;font-size:14px;color:var(--ink-2);transition:border-color .18s
+}
+.channels a:hover{border-color:var(--brand);text-decoration:none;color:var(--brand-dark)}
+.channels b{display:block;font-size:15px;color:var(--ink);margin-bottom:2px}
+.channels span{font-size:12.5px;color:var(--ink-3)}
+
+/* 深度解析 */
+.deep{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(18px,3vw,30px);box-shadow:var(--shadow)}
+.deep h3{font-size:17.5px;margin:20px 0 8px}
+.deep h3:first-child{margin-top:0}
+.deep p{font-size:15.5px;color:var(--ink-2)}
+.pull{border-left:3px solid var(--brand);background:var(--brand-soft);padding:12px 16px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;font-size:15px;color:var(--ink);margin:14px 0}
+.compare{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+.compare th,.compare td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+.compare th{background:#f6efdf;font-weight:600;color:var(--ink)}
+.compare td.num{font-variant-numeric:tabular-nums}
+
+/* 步骤 */
+.steps{list-style:none;margin:0;padding:0;counter-reset:st;display:grid;gap:12px}
+.steps li{position:relative;padding:12px 14px 12px 52px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm)}
+.steps li::before{
+  counter-increment:st;content:counter(st);position:absolute;left:13px;top:12px;
+  width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;
+  display:grid;place-items:center;font-size:13.5px;font-weight:700;
+}
+.steps b{display:block;font-size:15px}
+.steps span{font-size:14px;color:var(--ink-2)}
+
+/* FAQ */
+details{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:0;margin-bottom:9px}
+summary{cursor:pointer;padding:12px 16px;font-size:15px;font-weight:600;list-style:none;position:relative;padding-right:38px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--brand);font-size:18px;font-weight:400}
+details[open] summary::after{content:"–"}
+details .a{padding:0 16px 14px;font-size:14.5px;color:var(--ink-2)}
+
+/* 评论 */
+.quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.quote{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.quote p{font-size:14.5px;color:var(--ink-2);margin:0 0 8px}
+.quote footer{font-size:12.5px;color:var(--ink-3)}
+.quote .badge{font-size:11.5px;background:var(--accent-soft);color:#255a4b;border-radius:999px;padding:1px 8px;margin-right:6px}
+.quote .badge.warn{background:#f8e2da;color:var(--warn)}
+
+/* 时间线 */
+.timeline{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 18px 16px}
+.timeline li::before{content:"";position:absolute;left:-25px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--brand);border:2px solid var(--bg)}
+.timeline time{font-size:12.5px;color:var(--brand-dark);font-weight:600}
+.timeline .t{font-size:15px;font-weight:600;margin:2px 0}
+.timeline .d{font-size:14px;color:var(--ink-2)}
+
+/* 标签索引 */
+.tagcloud{display:flex;flex-wrap:wrap;gap:8px}
+.tagcloud a{font-size:13.5px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 13px;color:var(--ink-2)}
+.tagcloud a:hover{border-color:var(--brand);color:var(--brand-dark);text-decoration:none;background:var(--brand-soft)}
+
+/* 榜单 */
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.rank li{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:10px 14px}
+.rank .n{font-size:17px;font-weight:700;color:var(--brand);text-align:center}
+.rank .t{font-size:14.5px;font-weight:600}
+.rank .d{font-size:13px;color:var(--ink-2)}
+.rank .v{font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* 页脚 */
+footer.site{background:#221d15;color:#cfc4b0;margin-top:20px;padding:34px 0 22px;font-size:14px}
+footer.site a{color:#e4d6b8}
+footer.site a:hover{color:#fff}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
+.foot-grid h4{font-size:14px;color:#f4e9d2;margin-bottom:10px}
+.foot-grid ul{list-style:none;margin:0;padding:0;font-size:13.5px;line-height:2}
+.foot-brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:#f8efdb;margin-bottom:10px}
+.foot-bottom{border-top:1px solid #3a3125;margin-top:26px;padding-top:16px;font-size:12.5px;color:#9d917c;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+/* 回到顶部 */
+#toTop{
+  position:fixed;right:18px;bottom:20px;z-index:70;width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--line);background:#fff;color:var(--brand-dark);font-size:17px;cursor:pointer;
+  box-shadow:var(--shadow);display:none;place-items:center
+}
+#toTop.show{display:grid}
+
+/* 响应式 */
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr}
+  .layout{grid-template-columns:1fr}
+  aside.rail{position:static}
+  .rail-nav ul{display:flex;flex-wrap:wrap;gap:4px}
+  .rail-nav a{border-left:0;border-bottom:2px solid transparent}
+  .rail-nav a.active{border-left:0;border-bottom-color:var(--brand)}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .channels{grid-template-columns:repeat(3,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:680px){
+  header.site{top:0}
+  .announce{position:static}
+  section[id]{scroll-margin-top:64px}
+  .head-in{gap:10px}
+  .menu-btn{display:inline-block}
+  nav.main{display:none;width:100%;order:5}
+  nav.main.open{display:block}
+  nav.main ul{flex-direction:column;gap:0;border-top:1px solid var(--line);padding-top:6px}
+  nav.main a{padding:9px 10px;border-bottom:1px solid #f0e8d8}
+  .head-tools{margin-left:auto}
+  .search input{width:96px}
+  .grid-3,.grid-2,.quotes{grid-template-columns:1fr}
+  .channels{grid-template-columns:repeat(2,1fr)}
+  .hero-stats b{font-size:20px}
+  .rank li{grid-template-columns:26px 1fr;row-gap:2px}
+  .rank .v{grid-column:2}
+  .foot-grid{grid-template-columns:1fr}
+  .compare{font-size:13px}
+  .compare th,.compare td{padding:6px}
+  #toTop{bottom:14px;right:12px}
+}
+</style>
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<div class="announce">
+  <div class="wrap">
+    <span class="dot" aria-hidden="true"></span>
+    <span><b>黄仓库官网</b> 作业日报：11-07 入库 2,140 件，出库 9,860 单，24 小时发货率 99.2%</span>
+    <span>双十一临时工位已启用 6 个，夜班延至 00:30</span>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap head-in">
+    <a class="brand" href="/#top" aria-label="黄仓库首页">
+      <svg class="brand-mark" viewBox="0 0 64 64" role="img" aria-label="黄仓库标识">
+        <rect width="64" height="64" rx="13" fill="#b8862b"/>
+        <path d="M12 40V26l20-11 20 11v14H12z" fill="#f6e7c2"/>
+        <rect x="26" y="31" width="12" height="15" fill="#b8862b"/>
+        <path d="M12 26h40" stroke="#8a6318" stroke-width="2.5"/>
+        <path d="M20 40v-9h6v9M38 40v-9h6v9" fill="#e0c896"/>
+      </svg>
+      黄仓库官网
+    </a>
+
+    <nav class="main" id="mainNav" aria-label="主题导航">
+      <ul>
+        <li><a href="/#overview">仓储托管</a></li>
+        <li><a href="/#featured">精选方案</a></li>
+        <li><a href="/#updates">作业动态</a></li>
+        <li><a href="/#channels">业务频道</a></li>
+        <li><a href="/#deep">深度解析</a></li>
+        <li><a href="/#guide">入仓指南</a></li>
+        <li><a href="/#faq">常见问答</a></li>
+      </ul>
+    </nav>
+
+    <div class="head-tools">
+      <div class="search" role="search">
+        <input id="q" type="search" placeholder="搜库位、费用、退件" aria-label="站内搜索">
+        <button type="button" id="searchBtn">查找</button>
+      </div>
+      <button type="button" class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mainNav">菜单</button>
+    </div>
+  </div>
+  <div class="wrap"><p class="search-note" id="searchNote" hidden></p></div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">杭州萧山 · 3 号仓与 5 号仓在运行</span>
+        <h1 id="heroTitle">黄仓库官网</h1>
+        <p class="lede">做电商和批发生意的人，最怕库存对不上、旺季发不出。这里按实物库位管货，入库清点到 SKU 级别，出库按订单截单时间排波次；仓储、分拣、打包、同城配送与退件处理放在同一份台账里记。</p>
+        <div class="hero-actions">
+          <a class="btn" href="/#guide">查看入仓流程</a>
+          <a class="btn ghost" href="/#pricing">费用构成</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>2.4 万 m²</b><span>在租仓储面积</span></div>
+          <div><b>18,600</b><span>在管 SKU 数</span></div>
+          <div><b>99.2%</b><span>11-07 当日 24 小时发货率</span></div>
+          <div><b>6 条</b><span>分拣流水线</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg viewBox="0 0 420 300" role="img" aria-label="仓库库位与拣货通道示意图">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fff7e4"/><stop offset="1" stop-color="#ecd9ac"/>
+            </linearGradient>
+          </defs>
+          <rect x="8" y="10" width="404" height="280" rx="12" fill="url(#g1)" stroke="#dcc79a"/>
+          <g stroke="#b8862b" stroke-width="2" fill="#fffaf0">
+            <rect x="36" y="46" width="82" height="52" rx="4"/>
+            <rect x="146" y="46" width="82" height="52" rx="4"/>
+            <rect x="256" y="46" width="128" height="52" rx="4"/>
+            <rect x="36" y="126" width="82" height="52" rx="4"/>
+            <rect x="146" y="126" width="82" height="52" rx="4"/>
+            <rect x="256" y="126" width="128" height="52" rx="4"/>
+          </g>
+          <g font-family="PingFang SC, sans-serif" font-size="12" fill="#8a6318" text-anchor="middle">
+            <text x="77" y="76">A 区 · 快拣</text>
+            <text x="187" y="76">A 区 · 快拣</text>
+            <text x="320" y="76">B 区 · 中频</text>
+            <text x="77" y="156">B 区 · 中频</text>
+            <text x="187" y="156">C 区 · 高位</text>
+            <text x="320" y="156">C 区 · 高位</text>
+          </g>
+          <rect x="36" y="206" width="348" height="58" rx="6" fill="#2f6d5c" opacity=".12"/>
+          <path d="M50 235h320" stroke="#2f6d5c" stroke-width="3" stroke-dasharray="10 7"/>
+          <g font-family="PingFang SC, sans-serif" font-size="12" fill="#255a4b" text-anchor="middle">
+            <text x="210" y="258">打包台 · 6 个工位 · 主通道</text>
+          </g>
+          <g stroke="#b8862b" stroke-width="2" fill="none">
+            <path d="M398 30v40"/><path d="M392 30h12"/>
+          </g>
+        </svg>
+        <span class="tag">示意图 · 实际库位以系统编号为准</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="layout">
+
+      <div class="main-col">
+
+        <!-- 01 领域概览 -->
+        <section class="sec" id="overview">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">01 / 领域概览</div>
+              <h2>仓储托管到底托管了哪些活</h2>
+              <p>从卸货到退货回架，中间有 9 个动作需要落到人和时间。</p>
+            </div>
+          </div>
+          <p style="color:var(--ink-2)">仓配托管不是把货一放就完事。货到仓先预约卸货口，卸完清点件数，再按 SKU 做质检抽检；上架时要给每个 SKU 分配库位编号，A 区靠近打包台，C 区在高位货架。订单进来按平台截单时间切波次，拣货员推车走通道，打包台上贴面单、称重、封箱，最后按线路装车。退件是另一条线：登记外观，分可二次销售、翻新、报废三档。下面这张表把动作、责任人和耗时摆在一起，方便估算自己的货适合哪种方式。</p>
+          <table class="compare">
+            <caption style="caption-side:top;text-align:left;font-size:13px;color:var(--ink-3);padding-bottom:6px">仓储作业动作与常规耗时（2026-10 至 11 月作业记录）</caption>
+            <thead>
+              <tr><th>动作</th><th>责任岗位</th><th>常规耗时</th><th>记录方式</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>卸货与件数清点</td><td>收货组</td><td class="num">整柜 40—60 分钟</td><td>收货单 + 卸货口监控</td></tr>
+              <tr><td>质检抽检</td><td>品控</td><td class="num">按 5% 抽检率约 40 分钟</td><td>抽检记录表</td></tr>
+              <tr><td>库位上架</td><td>上架组</td><td class="num">1 个工作日内</td><td>系统库位变更日志</td></tr>
+              <tr><td>波次拣货</td><td>拣货组</td><td class="num">单波 25—40 分钟</td><td>拣货单扫码时间</td></tr>
+              <tr><td>打包称重</td><td>打包组</td><td class="num">单件 40—90 秒</td><td>称重台记录</td></tr>
+              <tr><td>退件分流</td><td>退件组</td><td class="num">登记当天，翻新逢周二、周四</td><td>退件台账</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size:14px;color:var(--ink-3)">注：耗时数据来自 3 号仓 10 月 12 日至 11 月 6 日的班次统计，遇大促会明显拉长。</p>
+        </section>
+
+        <!-- 02 精选内容推荐 -->
+        <section class="sec" id="featured">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">02 / 精选推荐</div>
+              <h2>三类货主常问的入库方案</h2>
+              <p>按货型分，方案细节差得比想象中多。</p>
+            </div>
+          </div>
+          <div class="grid-3">
+            <article class="card">
+              <img src="https://picsum.photos/seed/huangcangku-skincare/560/320" width="560" height="320" loading="lazy" alt="货架上排列整齐的护肤品纸箱与标签">
+              <div class="card-body">
+                <h3>美妆小件：按 SKU 分格上架</h3>
+                <p>瓶装与盒装混放容易压损。3 号仓给美妆客户配 60cm 分隔货位，单个库位不超过 8 个 SKU，拣货动线控制在 35 米内。</p>
+                <div class="meta"><span class="tag">小件拣货</span><span>2026-11-05 更新</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/huangcangku-apparel/560/320" width="560" height="320" loading="lazy" alt="挂装衣物在仓库挂杆区排列">
+              <div class="card-body">
+                <h3>服装挂装区：换季调库位</h3>
+                <p>秋冬款上架后，挂装区占到 5 号仓 B 区 320 组挂杆。换季时整区平移，库位编号同步改，历史拣货路径保留 30 天备查。</p>
+                <div class="meta"><span class="tag green">挂装存储</span><span>2026-11-02 更新</span></div>
+              </div>
+            </article>
+            <article class="card">
+              <img src="https://picsum.photos/seed/huangcangku-bulk/560/320" width="560" height="320" loading="lazy" alt="托盘上的整箱货物堆叠在仓库地面">
+              <div class="card-body">
+                <h3>整托批发：月台直发不走拆零</h3>
+                <p>整托出库省掉拆零与二次打包。10 月 29 日一单 42 托的日用品，从月台装车到发车用了 1 小时 20 分，直接走批发客户自提。</p>
+                <div class="meta"><span class="tag">整托出库</span><span>2026-10-29 记录</span></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- 03 最新更新 -->
+        <section class="sec" id="updates">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">03 / 作业动态</div>
+              <h2>近两周入库与出库记录</h2>
+              <p>只列已经发生的班次数据，不含计划。</p>
+            </div>
+          </div>
+          <ul class="list">
+            <li>
+              <div class="t">11-07 夜班出库 3,420 单，打包工位满负荷</div>
+              <div class="d">抖音小店订单占当晚 46%，21:00 截单波次在 23:10 完成装车，比 10 月同期快 25 分钟。</div>
+              <div class="m">来源：3 号仓 WMS 出库流水 · 2026-11-07</div>
+            </li>
+            <li>
+              <div class="t">11-06 家纺客户两板货入库，抽检发现 3 件外箱压痕</div>
+              <div class="d">压痕件单独隔离， photographed 后通知客户，按客户回复做换箱处理，未进入可用库存。</div>
+              <div class="m">来源：收货异常记录单 · 2026-11-06</div>
+            </li>
+            <li>
+              <div class="t">11-04 高位货架第 7 排完成季度盘点</div>
+              <div class="d">盘点 1,284 个库位，账面与实物差异 2 个，均为同款不同色混放，已重新贴标。</div>
+              <div class="m">来源：盘点差异表 · 2026-11-04</div>
+            </li>
+            <li>
+              <div class="t">11-02 退件翻新处理 216 件，回架 189 件</div>
+              <div class="d">剩余 27 件判定为外包装破损不可二次销售，按报废流程登记，客户可申请调阅照片。</div>
+              <div class="m">来源：退件台账 · 2026-11-02</div>
+            </li>
+            <li>
+              <div class="t">10-30 新增拼多多订单接口联调，测试单 80 单</div>
+              <div class="d">联调期间库存扣减以 3 号仓物理库存为准，测试单不计入正式出库单量。</div>
+              <div class="m">来源：接口联调记录 · 2026-10-30</div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 04 分类入口 -->
+        <section class="sec" id="channels">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">04 / 业务频道</div>
+              <h2>按业务环节找入口</h2>
+              <p>十个频道，各自对应一类作业和一份台账。</p>
+            </div>
+          </div>
+          <div class="channels">
+            <a href="/#guide"><b>入库预约</b><span>卸货口排期与清点</span></a>
+            <a href="/#deep"><b>库位规划</b><span>A/B/C 分区规则</span></a>
+            <a href="/#pricing"><b>仓储费用</b><span>存储与操作计价</span></a>
+            <a href="/#updates"><b>波次拣货</b><span>截单时间与流水线</span></a>
+            <a href="/#featured"><b>打包耗材</b><span>纸箱、气柱袋、面单</span></a>
+            <a href="/#faq"><b>退件处理</b><span>三档分流与回架</span></a>
+            <a href="/#guide"><b>同城配送</b><span>线路与装车时刻</span></a>
+            <a href="/#rank"><b>库存盘点</b><span>月度与季度盘点</span></a>
+            <a href="/#rank"><b>旺季扩容</b><span>周租面积与工位</span></a>
+            <a href="/#faq"><b>系统对接</b><span>平台订单与 ERP</span></a>
+          </div>
+        </section>
+
+        <!-- 05 深度解析（唯一主体阅读区） -->
+        <section class="sec" id="deep">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">05 / 深度解析</div>
+              <h2>库位分区该按周转率还是按品类</h2>
+              <p>两种排法都有人用，争的是拣货路径和盘点成本。</p>
+            </div>
+          </div>
+          <div class="deep">
+            <h3>一个可以拿去核对的说法：周转率优先，比品类优先平均少走 210 米</h3>
+            <p>3 号仓在 10 月做过一次对照。A 区靠打包台的 96 个库位，先按品类排（美妆一组、家纺一组），拣货单平均行走 430 米；一周后改成按出库频次排，同样 96 个库位，平均行走 220 米。差出的 210 米，按拣货员每小时走 3.2 公里折算，单波次省 3.9 分钟。</p>
+            <p>但这不是无条件成立。按频次排的代价是同一品类的货被拆散：一瓶爽肤水可能在 A 区，同系列的乳液在 C 区。新员工培训期里，找货错误率从 0.8% 升到 1.6%，两周后才落回 0.9%。如果一周只发几百单、拣货员流动又大，品类排法的直观性更划算。</p>
+            <div class="pull">判断句：日出库单超过 1,500 单的仓，按周转率分区的收益能覆盖重新培训的成本；低于 500 单的仓，先把品类标签贴清楚更实际。中间区间看具体 SKU 数，SKU 超过 3,000 个时频次排法的优势开始明显。</div>
+            <h3>规则前后变化：2026 年 9 月开始改的拣货波次</h3>
+            <p>9 月之前，3 号仓按整点切波次，每个整点收一次单。9 月 15 日起改成按平台截单时间切：淘宝 15:00、抖音 21:00、拼多多 17:00。改动后，10 月 8 日至 10 月 31 日统计的当日发货率从 97.4% 升到 99.1%，但打包组在 21:00 后的加班时长也涨了 18%，主要压在抖音那波。</p>
+            <h3>说法差异：客户系统里的可用库存和仓里实物差在哪</h3>
+            <p>10 月 21 日，一位做小家电的客户反馈系统显示可售 320 件，仓库实物只有 311 件。查下来是 9 件退货在途、系统已回加可用库存，但退件还没到仓。双方对“可用”的定义不同：客户按订单可售算，仓库按货架实物算。之后改成退件到仓登记后才回加库存，差异归零。这类分歧不靠口头解释，靠的是台账里那条入库时间戳。</p>
+            <h3>可核对的拆解：一次差异复盘的三条记录</h3>
+            <ul class="list">
+              <li><div class="t">记录 1：系统库存快照</div><div class="d">10 月 21 日 09:00，客户 ERP 可用库存 320 件，批次号 20261018-A。</div></li>
+              <li><div class="t">记录 2：退件在途清单</div><div class="d">9 件退件状态为“运输中”，预计 10 月 22 日到仓，尚未做外观登记。</div></li>
+              <li><div class="t">记录 3：货架实物盘点</div><div class="d">10 月 21 日 10:30，A-34 库位实物 311 件，与上架记录一致。</div></li>
+            </ul>
+            <p>把三条记录并排放，差异来源就唯一了。这里的事实是：库存口径不同。推测部分是：如果退件在途按 2 天回加，大促前可能造成超卖。回应是客户接受延后回加，并同意在退件到仓当天短信告知。转述一条客户的原话：“超卖一单赔 15 元，比少卖 9 件难受。”</p>
+          </div>
+        </section>
+
+        <!-- 06 体验指南 -->
+        <section class="sec" id="guide">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">06 / 入仓指南</div>
+              <h2>第一次入仓的五步</h2>
+              <p>按顺序走，每一步都有对应的确认单。</p>
+            </div>
+          </div>
+          <ol class="steps">
+            <li><b>提交货品资料</b><span>SKU 清单、单件尺寸重量、是否含液体与电池。含电池的走单独审批，10 月有一批蓝牙耳机因未申报被拒收。</span></li>
+            <li><b>预约卸货时段</b><span>按卸货口排期，整柜提前 3 天约。3 号仓有 4 个卸货口，上午高峰在 9:00—11:00。</span></li>
+            <li><b>现场清点与抽检</b><span>件数当面点清，抽检率 5%。外箱破损件单独隔离拍照，是否接收由客户书面回复。</span></li>
+            <li><b>库位上架与编号</b><span>系统生成库位号，格式为 区-排-列-层，如 A-12-03-2。上架完成时间写入入库单。</span></li>
+            <li><b>订单接入与首波测试</b><span>先跑 20 单测试单，核对面单、称重与库存扣减。测试通过后才转正式波次。</span></li>
+          </ol>
+          <p style="margin-top:14px;font-size:14px;color:var(--ink-3)">5 号仓的挂装客户还要多做一步：衣架规格确认。10 月有客户自带衣架与仓内挂杆不匹配，返工 90 件。</p>
+        </section>
+
+        <!-- 07 费用对照 -->
+        <section class="sec" id="pricing">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">07 / 费用构成</div>
+              <h2>仓储费与操作费分开看</h2>
+              <p>报价单里最容易看漏的是耗材和退件。</p>
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="card" style="padding:16px">
+              <h3>仓储费（占用面积计）</h3>
+              <ul class="list">
+                <li><div class="t">标准货架区</div><div class="d">按库位占用计，日均约 2.8 元/库位</div></li>
+                <li><div class="t">整托地面区</div><div class="d">按托计，日均约 6.5 元/托</div></li>
+                <li><div class="t">挂装区</div><div class="d">按挂杆组计，日均约 4.2 元/组</div></li>
+              </ul>
+            </div>
+            <div class="card" style="padding:16px">
+              <h3>操作费（按件与按单）</h3>
+              <ul class="list">
+                <li><div class="t">小件出库</div><div class="d">0.6 元/单起，超 3 件每件加 0.15 元</div></li>
+                <li><div class="t">大件出库</div><div class="d">按体积分档，1.2—3.4 元/件</div></li>
+                <li><div class="t">退件处理</div><div class="d">登记 1 元/件，翻新按工时另计</div></li>
+              </ul>
+            </div>
+          </div>
+          <p style="margin-top:14px;color:var(--ink-2);font-size:14.5px">纸箱、气柱袋、面单属于耗材，按实际用量从预存账户扣。10 月一位客户因为换了大一号纸箱，单均耗材从 0.74 元升到 0.91 元，包装体积增大也让出库体积计费档位上跳了一档。这类变化报价单不会提前写，只能在月度对账单里看出来。</p>
+        </section>
+
+        <!-- 08 FAQ -->
+        <section class="sec" id="faq">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">08 / 常见问答</div>
+              <h2>入仓前问得最多的六件事</h2>
+              <p>回答按作业实际操作写，不含承诺性表述。</p>
+            </div>
+          </div>
+          <details>
+            <summary>入库上架一般要多久？</summary>
+            <div class="a">整柜到仓后按预约批次排。卸货加清点通常 0.5 个工作日，质检抽检加系统上架 1 个工作日。11-03 入库的两板家纺，卸货 46 分钟，上架完成时间为次日上午 10:20。散货拼柜会更慢，取决于同时段到仓车辆数。</div>
+          </details>
+          <details>
+            <summary>库位是怎么分配的？</summary>
+            <div class="a">按 SKU 周转速度分 A/B/C 三档。A 档放靠近打包台的拣货通道，B 档在中区，C 档上高位货架。新接入的前两周是观察期，按实际出库频次调整一次，之后季度性微调。</div>
+          </details>
+          <details>
+            <summary>旺季爆单能不能临时扩容？</summary>
+            <div class="a">可以按周租扩容存储面积和打包工位。10-27 给出的双十一预案是：10 月 28 日至 11 月 15 日增加 6 个打包工位，夜班从 22:00 延到 00:30，需提前 7 天确认。工位加了人也要加，仓里不代招临时工。</div>
+          </details>
+          <details>
+            <summary>仓储费和操作费怎么算？</summary>
+            <div class="a">存储按占用库位面积和天数计，操作费按入库件数、出库单量分别计。小件单件出库操作费 0.6 元起，大件按体积档位加价。报价单会单列耗材与退件处理，签约前建议让对方把耗材单价也写进去。</div>
+          </details>
+          <details>
+            <summary>退件怎么处理？</summary>
+            <div class="a">退件到仓先登记外观，再按可二次销售、需翻新、报废三类分流。可二次销售的当天回架，翻新件集中在每周二、周四处理，结果录入退件台账。报废件拍照留存，客户可申请调阅。</div>
+          </details>
+          <details>
+            <summary>能对接哪些电商平台？</summary>
+            <div class="a">系统支持淘宝、京东、拼多多、抖音小店与自有小程序订单导入，也可以走 ERP 接口批量同步。库存按物理仓扣减，多平台共用同一份可用库存。拼多多接口在 10-30 完成联调，正式切换前仍走手工导入。</div>
+          </details>
+        </section>
+
+        <!-- 09 用户评论 -->
+        <section class="sec" id="reviews">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">09 / 货主反馈</div>
+              <h2>合作方怎么说</h2>
+              <p>含正面、中性，也有没解决的抱怨。</p>
+            </div>
+          </div>
+          <div class="quotes">
+            <div class="quote">
+              <p>“A 区改成按频次排以后，我们美妆单波次确实快了，拣货员少走两趟。但同系列的产品被拆到两个区，客服查货位要问仓里。” </p>
+              <footer><span class="badge">美妆类目 · 日出 900 单</span>郭姓货主 · 2026-11-05</footer>
+            </div>
+            <div class="quote">
+              <p>“11-06 那两板家纺有 3 件外箱压痕，拍照当天就发过来了，换箱也做了。就是通知只走了微信群，我们运营下班没看到，第二天才发现。” </p>
+              <footer><span class="badge warn">家纺类目</span>陈姓运营 · 2026-11-06</footer>
+            </div>
+            <div class="quote">
+              <p>“退件翻新排周二周四，我们退货集中在周末，等两天才能回架，赶上活动就有点卡。” </p>
+              <footer><span class="badge">小家电 · 退货率高</span>一位做破壁机的店主 · 2026-11-02</footer>
+            </div>
+            <div class="quote">
+              <p>“整托直发那单 42 托，1 小时 20 分装完，比之前找的仓快，月台调度确实专业。” </p>
+              <footer><span class="badge">日用品批发</span>徐姓采购 · 2026-10-29</footer>
+            </div>
+            <div class="quote">
+              <p>“盘点差异 2 个库位，是红蓝两个颜色混放了。数量对得上，但颜色发错一单赔了 15 元。希望同款不同色强制分格。” </p>
+              <footer><span class="badge warn">家居服</span>余姓店主 · 2026-11-04</footer>
+            </div>
+            <div class="quote">
+              <p>“拼多多接口联调了 80 单，测试期还要手工导，节奏慢半拍。技术对接群回复倒是快。” </p>
+              <footer><span class="badge">拼多多商家</span>一位做五金配件的货主 · 2026-10-30</footer>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10 相关资讯 -->
+        <section class="sec" id="news">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">10 / 相关资讯</div>
+              <h2>仓储与履约的行业动向</h2>
+              <p>只摘与选址、用工、系统相关的内容。</p>
+            </div>
+          </div>
+          <ul class="list">
+            <li>
+              <div class="t">杭州萧山 11 月起对仓库装卸时段做错峰引导</div>
+              <div class="d">部分路段 7:00—9:00 限制大型货车靠边装卸，仓方把早班卸货口开放时间提前到 6:30。对入仓客户的影响是：预约早高峰的整柜车要重新排。</div>
+              <div class="m">来源：园区 10-28 通知 · 转述</div>
+            </li>
+            <li>
+              <div class="t">电商平台 11 月大促发货考核收紧到 48 小时</div>
+              <div class="d">部分类目从 72 小时缩到 48 小时，超时计入店铺分。仓里据此把抖音波次从 21:00 提前到 20:30 截单，具体以平台公告为准。</div>
+              <div class="m">来源：平台规则页 · 2026-11-01 · 事实</div>
+            </li>
+            <li>
+              <div class="t">临时工用工成本在 11 月首周上浮约 12%</div>
+              <div class="d">打包临时工时薪从 22 元涨到 25 元区间，仓方按周结算。这部分成本是否转嫁到操作费，各仓做法不一。</div>
+              <div class="m">来源：多家仓库招聘信息 · 推测与综合</div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 11 相关推荐 -->
+        <section class="sec" id="related">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">11 / 相关推荐</div>
+              <h2>按需求挑下一篇</h2>
+              <p>标签是具体词，点进去看对应内容。</p>
+            </div>
+          </div>
+          <div class="tagcloud">
+            <a href="/#deep">库位分区规则</a>
+            <a href="/#pricing">仓储费怎么算</a>
+            <a href="/#guide">入仓预约流程</a>
+            <a href="/#faq">退件翻新周期</a>
+            <a href="/#updates">波次拣货时间</a>
+            <a href="/#rank">月度盘点差异</a>
+            <a href="/#featured">美妆小件上架</a>
+            <a href="/#featured">服装挂装存储</a>
+            <a href="/#featured">整托直发出库</a>
+            <a href="/#faq">拼多多接口对接</a>
+            <a href="/#guide">同城配送线路</a>
+            <a href="/#rank">旺季工位扩容</a>
+          </div>
+        </section>
+
+        <!-- 12 榜单 -->
+        <section class="sec" id="rank">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">12 / 作业排行榜</div>
+              <h2>10 月出库单量前六的客户类目</h2>
+              <p>按 10 月 1 日至 31 日实际出库单量排。</p>
+            </div>
+          </div>
+          <ol class="rank">
+            <li><span class="n">1</span><div><div class="t">家居日用</div><div class="d">收纳箱、拖把、置物架为主，10 月中旬一波活动拉高单量</div></div><span class="v">18.4 万单</span></li>
+            <li><span class="n">2</span><div><div class="t">美妆个护</div><div class="d">小件为主，拣货频次最高，A 区占 62 个库位</div></div><span class="v">12.7 万单</span></li>
+            <li><span class="n">3</span><div><div class="t">服装挂装</div><div class="d">秋冬款上架后占 5 号仓 B 区 320 组挂杆</div></div><span class="v">9.3 万单</span></li>
+            <li><span class="n">4</span><div><div class="t">小家电</div><div class="d">体积大、退货率高，退件翻新工时占比 21%</div></div><span class="v">6.1 万单</span></li>
+            <li><span class="n">5</span><div><div class="t">母婴用品</div><div class="d">对效期敏感，入库即贴临期标，先进先出</div></div><span class="v">4.5 万单</span></li>
+            <li><span class="n">6</span><div><div class="t">五金配件</div><div class="d">多 SKU 小批量，拼多多接口联调中</div></div><span class="v">2.8 万单</span></li>
+          </ol>
+        </section>
+
+        <!-- 13 时间线 -->
+        <section class="sec" id="timeline">
+          <div class="sec-head">
+            <div>
+              <div class="kicker">13 / 关键时间线</div>
+              <h2>今年秋天几个节点</h2>
+              <p>涉及规则调整与硬件改造。</p>
+            </div>
+          </div>
+          <ul class="timeline">
+            <li><time datetime="2026-09-15">2026-09-15</time><div class="t">波次切分改为按平台截单时间</div><div class="d">淘宝 15:00、拼多多 17:00、抖音 21:00 三波，替代原来整点切波。</div></li>
+            <li><time datetime="2026-10-08">2026-10-08</time><div class="t">A 区 96 个库位按周转率重排</div><div class="d">同一品类拆散，新员工培训两周，拣货错误率一度到 1.6%。</div></li>
+            <li><time datetime="2026-10-27">2026-10-27</time><div class="t">双十一扩容预案确认</div><div class="d">10 月 28 日至 11 月 15 日加 6 个打包工位，夜班延至 00:30。</div></li>
+            <li><time datetime="2026-10-30">2026-10-30</time><div class="t">拼多多订单接口完成联调</div><div class="d">80 单测试通过，库存口径统一到物理仓，正式切换待客户确认。</div></li>
+            <li><time datetime="2026-11-04">2026-11-04</time><div class="t">高位货架第 7 排季度盘点</div><div class="d">1,284 个库位，差异 2 个，均为同款混色。</div></li>
+          </ul>
+        </section>
+
+      </div><!-- /main-col -->
+
+      <!-- 侧栏 -->
+      <aside class="rail" aria-label="侧栏导航与信息">
+        <div class="rail-card rail-nav" id="railNav">
+          <h3>栏目导航</h3>
+          <ul>
+            <li><a href="/#overview">领域概览</a></li>
+            <li><a href="/#featured">精选推荐</a></li>
+            <li><a href="/#updates">作业动态</a></li>
+            <li><a href="/#channels">业务频道</a></li>
+            <li><a href="/#deep">深度解析</a></li>
+            <li><a href="/#guide">入仓指南</a></li>
+            <li><a href="/#pricing">费用构成</a></li>
+            <li><a href="/#faq">常见问答</a></li>
+            <li><a href="/#reviews">货主反馈</a></li>
+            <li><a href="/#rank">作业排行</a></li>
+            <li><a href="/#timeline">时间线</a></li>
+          </ul>
+        </div>
+        <div class="rail-card">
+          <h3>今日作业快照</h3>
+          <p class="rail-meta">截至 <b>2026-11-07 23:40</b></p>
+          <p class="rail-meta">在库库位 <b>4,712</b> 个<br>今日入库 <b>2,140</b> 件<br>今日出库 <b>9,860</b> 单<br>退件登记 <b>187</b> 件<br>翻新待处理 <b>34</b> 件</p>
+        </div>
+        <div class="rail-card">
+          <h3>近期提醒</h3>
+          <ul class="list">
+            <li><div class="t">11-10 前确认大促工位</div><div class="d">夜班延时至 00:30 需提前 7 天锁定</div></li>
+            <li><div class="t">11-08 卸货口早班提前至 6:30</div><div class="d">受园区错峰引导影响</div></li>
+          </ul>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <svg width="30" height="30" viewBox="0 0 64 64" role="img" aria-label="黄仓库图标">
+            <rect width="64" height="64" rx="13" fill="#b8862b"/>
+            <path d="M12 40V26l20-11 20 11v14H12z" fill="#f6e7c2"/>
+            <rect x="26" y="31" width="12" height="15" fill="#b8862b"/>
+          </svg>
+          黄仓库官网
+        </div>
+        <p style="font-size:13.5px;line-height:1.9;color:#b6ab97;max-width:24em">仓里的事按班次记：几点卸的货、上了哪个库位、哪一波装车走的，都能在台账里翻到对应那一条。</p>
+        <p style="font-size:12.5px;color:#9d917c;margin-top:12px">页面信息更新于 2026-11-08，对应正文更新项：11-07 出库流水、11-06 收货异常、11-04 盘点差异。</p>
+      </div>
+      <div>
+        <h4>作业频道</h4>
+        <ul>
+          <li><a href="/#guide">入库预约与清点</a></li>
+          <li><a href="/#deep">库位分区规划</a></li>
+          <li><a href="/#updates">波次拣货时间</a></li>
+          <li><a href="/#pricing">仓储与操作费用</a></li>
+          <li><a href="/#faq">退件三档分流</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>资料与工具</h4>
+        <ul>
+          <li><a href="/#guide">首单入仓五步</a></li>
+          <li><a href="/#rank">10 月单量排行</a></li>
+          <li><a href="/#timeline">规则调整时间线</a></li>
+          <li><a href="/#news">行业动向摘录</a></li>
+          <li><a href="/#related">按需求选内容</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>关于本站</h4>
+        <ul>
+          <li><a href="/#overview">作业概览</a></li>
+          <li><a href="/#reviews">货主反馈</a></li>
+          <li><a href="/#faq">系统对接说明</a></li>
+          <li><a href="/#updates">数据来源说明</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>页面内单量、件数、库位数均为示例数据，用于示意统计口径；日期与班次对应 2026 年 10 月至 11 月作业记录。</span>
+      <span>© 2026 黄仓库官网 · 内容示例</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" type="button" aria-label="回到顶部">↑</button>
+
+<script>
+(function(){
+  var menuBtn = document.getElementById('menuBtn');
+  var mainNav = document.getElementById('mainNav');
+  if(menuBtn && mainNav){
+    menuBtn.addEventListener('click', function(){
+      var open = mainNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    mainNav.addEventListener('click', function(e){
+      if(e.target.tagName === 'A' && window.innerWidth <= 680){
+        mainNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded','false');
+      }
+    });
+  }
+
+  // 搜索本地查找
+  var q = document.getElementById('q');
+  var note = document.getElementById('searchNote');
+  var btn = document.getElementById('searchBtn');
+  function doSearch(){
+    if(!q || !note) return;
+    var kw = (q.value || '').trim();
+    if(!kw){ note.hidden = true; note.textContent = ''; return; }
+    var hits = [];
+    document.querySelectorAll('main h2, main h3, main .t, main summary, main .tagcloud a, main .channels a').forEach(function(el){
+      if(el.textContent.indexOf(kw) > -1){
+        hits.push(el.textContent.trim().slice(0, 26));
+      }
+    });
+    if(hits.length === 0){
+      note.hidden = false;
+      note.textContent = '没有找到与“' + kw + '”相关的条目，可试试“库位”“退件”“仓储费”“波次”。';
+    }else{
+      var uniq = hits.filter(function(v,i){ return hits.indexOf(v) === i; }).slice(0,6);
+      note.hidden = false;
+      note.textContent = '找到 ' + uniq.length + ' 条相关：' + uniq.join(' / ');
+    }
+  }
+  if(btn) btn.addEventListener('click', doSearch);
+  if(q) q.addEventListener('keydown', function(e){ if(e.key === 'Enter'){ e.preventDefault(); doSearch(); } });
+
+  // 回到顶部
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    if(!toTop) return;
+    if(window.scrollY > 520){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
+  }, {passive:true});
+  if(toTop){
+    toTop.addEventListener('click', function(){
+      window.scrollTo({top:0, behavior: 'smooth'});
+    });
+  }
+
+  // 侧栏滚动高亮
+  var links = document.querySelectorAll('#railNav a');
+  var map = [];
+  links.forEach(function(a){
+    var id = a.getAttribute('href').replace('/#','');
+    var sec = document.getElementById(id);
+    if(sec) map.push({a:a, el:sec});
+  });
+  function highlight(){
+    var pos = window.scrollY + 160;
+    var current = null;
+    map.forEach(function(item){
+      if(item.el.offsetTop <= pos) current = item;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if(current) current.a.classList.add('active');
+  }
+  window.addEventListener('scroll', highlight, {passive:true});
+  highlight();
+})();
+</script>
+</body>
+  </html>
